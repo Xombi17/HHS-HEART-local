@@ -1,8 +1,7 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import AnimatedSection from '../common/AnimatedSection';
-import { useInView } from 'react-intersection-observer';
 
 const stats = [
   {
@@ -28,15 +27,22 @@ const stats = [
 ];
 
 const StatsSection = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1
-  });
+  const [reduceAnimations, setReduceAnimations] = useState(false);
+  
+  useEffect(() => {
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setReduceAnimations(prefersReducedMotion);
+  }, []);
 
   return (
     <section className="py-20 bg-gradient-to-b from-red-50 to-white dark:from-gray-800 dark:to-gray-900">
       <div className="container mx-auto px-4">
-        <AnimatedSection animation="slideUp" className="text-center mb-16">
+        <AnimatedSection 
+          animation="slideUp" 
+          className="text-center mb-16"
+          disabled={reduceAnimations}
+        >
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
             Heart Facts That Matter
           </h2>
@@ -45,20 +51,21 @@ const StatsSection = () => {
           </p>
         </AnimatedSection>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10" ref={ref}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {stats.map((stat, index) => (
             <AnimatedSection 
               key={index} 
               animation="fadeIn" 
-              delay={index * 200}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 text-center transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+              delay={reduceAnimations ? 0 : Math.min(index * 100, 300)}
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 text-center transition-shadow duration-300 hover:shadow-xl"
+              disabled={reduceAnimations}
             >
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 dark:bg-red-900/30 mb-6 mx-auto">
                 <svg className="w-8 h-8 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
               </div>
-              <div className="counter-value text-4xl font-bold text-red-600 dark:text-red-500 mb-2">
+              <div className="text-4xl font-bold text-red-600 dark:text-red-500 mb-2">
                 {stat.value}
               </div>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">

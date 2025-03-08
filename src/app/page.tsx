@@ -4,27 +4,41 @@ import StatsSection from "@/components/landing/StatsSection";
 import TestimonialSection from "@/components/landing/TestimonialSection";
 import CtaSection from "@/components/landing/CtaSection";
 import SectionDivider from "@/components/common/SectionDivider";
+import { Suspense } from "react";
+
+// Lazy loading placeholder for sections
+const SectionPlaceholder = () => (
+  <div className="w-full py-20 flex justify-center items-center">
+    <div className="w-12 h-12 rounded-full border-4 border-red-600 border-t-transparent animate-spin"></div>
+  </div>
+);
 
 export default function Home() {
   return (
-    <>
-      <Hero />
+    <main className="overflow-hidden">
+      <Suspense fallback={<SectionPlaceholder />}>
+        <Hero />
+      </Suspense>
       
-      <SectionDivider from="from-white" to="to-white" height="h-16" />
+      <Suspense fallback={<SectionPlaceholder />}>
+        <FeatureHighlights />
+      </Suspense>
       
-      <FeatureHighlights />
+      <Suspense fallback={<SectionPlaceholder />}>
+        <SectionDivider from="from-white" to="to-red-50" height="h-16" wave={true} />
+      </Suspense>
       
-      <SectionDivider from="from-white" to="to-red-50" height="h-24" wave={true} />
+      <Suspense fallback={<SectionPlaceholder />}>
+        <StatsSection />
+      </Suspense>
       
-      <StatsSection />
+      <Suspense fallback={<SectionPlaceholder />}>
+        <TestimonialSection />
+      </Suspense>
       
-      <SectionDivider from="from-white" to="to-white" height="h-16" />
-      
-      <TestimonialSection />
-      
-      <SectionDivider from="from-white" to="to-white" height="h-16" />
-      
-      <CtaSection />
-    </>
+      <Suspense fallback={<SectionPlaceholder />}>
+        <CtaSection />
+      </Suspense>
+    </main>
   );
 }

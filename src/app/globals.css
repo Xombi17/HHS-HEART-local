@@ -47,24 +47,24 @@ section[id] {
   outline: none;
 }
 
-/* Animation keyframes */
+/* Simplified animation keyframes with fewer steps */
 @keyframes blob {
   0% {
     transform: translate(0px, 0px) scale(1);
   }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
+  50% {
+    transform: translate(20px, -30px) scale(1.1);
   }
   100% {
     transform: translate(0px, 0px) scale(1);
   }
 }
 
+/* Use hardware acceleration for animations */
 .animate-blob {
-  animation: blob 7s infinite;
+  animation: blob 10s infinite;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .animation-delay-2000 {
@@ -82,4 +82,28 @@ section[id] {
 
 .bg-gradient-conic {
   background-image: conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops));
+}
+
+/* Performance optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.hardware-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-blob {
+    animation: none !important;
+  }
 }
