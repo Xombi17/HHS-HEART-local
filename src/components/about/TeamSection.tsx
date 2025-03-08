@@ -1,11 +1,9 @@
 'use client';
 
-import React from 'react';
-import TeamMember, { TeamMemberProps } from './TeamMember';
-import AnimatedSection from '../common/AnimatedSection';
+import TeamMember from './TeamMember';
+import type { TeamMemberProps } from './TeamMember';
 
-// Placeholder team data - replace with actual team data
-const teamData: TeamMemberProps[] = [
+const teamData = [
   {
     name: 'Varad Joshi',
     role: 'Team Lead',
@@ -108,7 +106,7 @@ const teamData: TeamMemberProps[] = [
   }
 ];
 
-const TeamSection = () => {
+export default function TeamSection() {
   return (
     <section className="py-20 bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4">
@@ -123,19 +121,19 @@ const TeamSection = () => {
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {teamData.map((member, index) => (
-            <div key={member.name} className="fade-in" style={{ animationDelay: `${index * 150}ms` }}>
-              <TeamMember 
-                name={member.name}
-                role={member.role}
-                imageSrc={member.imageSrc}
-                socialLinks={member.socialLinks}
-              />
+            <div 
+              key={member.name} 
+              className="fade-in" 
+              style={{ 
+                animationDelay: `${index * 150}ms`,
+                opacity: 0
+              }}
+            >
+              <TeamMember {...member} />
             </div>
           ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default TeamSection; 
+} 
