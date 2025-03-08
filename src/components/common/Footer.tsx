@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { Parallax } from 'react-parallax';
 
 const Footer = () => {
   return (

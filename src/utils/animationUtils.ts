@@ -3,31 +3,30 @@
 import { useEffect, useState, useRef, RefObject } from 'react';
 
 /**
- * Hook to detect when an element is visible in the viewport
+ * Custom hook to detect when an element is in the viewport
  * @param options IntersectionObserver options
- * @returns [ref, isVisible] - Ref to attach to the element and boolean indicating if element is visible
+ * @returns [ref, isVisible] - ref to attach to the element, and whether it's visible
  */
 export const useInView = <T extends HTMLElement>(
   options = { threshold: 0.1, triggerOnce: true }
 ): [RefObject<T>, boolean] => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<T>(null);
-  const { threshold, triggerOnce } = options;
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          if (triggerOnce && ref.current) {
-            observer.unobserve(ref.current);
-          }
-        } else if (!triggerOnce) {
-          setIsVisible(false);
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true);
+        if (options.triggerOnce && ref.current) {
+          observer.unobserve(ref.current);
         }
-      },
-      { threshold }
-    );
+      } else if (!options.triggerOnce) {
+        setIsVisible(false);
+      }
+    }, {
+      threshold: options.threshold,
+      rootMargin: '0px',
+    });
 
     const currentRef = ref.current;
     if (currentRef) {
@@ -39,7 +38,7 @@ export const useInView = <T extends HTMLElement>(
         observer.unobserve(currentRef);
       }
     };
-  }, [threshold, triggerOnce]);
+  }, [options.threshold, options.triggerOnce]);
 
   return [ref, isVisible];
 };
