@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="400" fill="#f3f4f6"/>
+  
+  <!-- Person silhouette -->
+  <circle cx="200" cy="150" r="70" fill="#d1d5db"/>
+  <path d="M200,230 C150,230 110,270 100,320 L300,320 C290,270 250,230 200,230 Z" fill="#d1d5db"/>
+  
+  <!-- Text -->
+  <text x="200" y="370" font-family="Arial" font-size="16" fill="#6b7280" text-anchor="middle">Team Member Photo</text>
+</svg> 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="800" fill="#f8f9fa"/>
+  
+  <!-- Heart outline -->
+  <path d="M400,650 C550,550 700,400 700,250 C700,150 620,100 550,100 C480,100 430,150 400,200 C370,150 320,100 250,100 C180,100 100,150 100,250 C100,400 250,550 400,650 Z" 
+        fill="#f8d0d0" stroke="#cc0000" stroke-width="10"/>
+  
+  <!-- Heart chambers -->
+  <path d="M400,600 C500,525 600,425 600,300 C600,250 570,225 550,225 L400,225 L400,600 Z" 
+        fill="#e06666" stroke="#cc0000" stroke-width="5"/>
+  <path d="M400,600 C300,525 200,425 200,300 C200,250 230,225 250,225 L400,225 L400,600 Z" 
+        fill="#e06666" stroke="#cc0000" stroke-width="5"/>
+  <path d="M400,225 C450,175 500,150 550,150 C600,150 650,175 650,225 L400,225 Z" 
+        fill="#f2a5a5" stroke="#cc0000" stroke-width="5"/>
+  <path d="M400,225 C350,175 300,150 250,150 C200,150 150,175 150,225 L400,225 Z" 
+        fill="#f2a5a5" stroke="#cc0000" stroke-width="5"/>
+  
+  <!-- Aorta -->
+  <path d="M550,150 C575,125 600,100 600,75 C600,50 575,25 550,25 C525,25 500,50 500,75 L500,150 L550,150 Z" 
+        fill="#ff9999" stroke="#cc0000" stroke-width="5"/>
+  
+  <!-- Pulmonary artery -->
+  <path d="M250,150 C225,125 200,100 200,75 C200,50 225,25 250,25 C275,25 300,50 300,75 L300,150 L250,150 Z" 
+        fill="#ff9999" stroke="#cc0000" stroke-width="5"/>
+  
+  <!-- Blood flow lines -->
+  <path d="M400,400 C450,350 500,325 550,325" fill="none" stroke="#cc0000" stroke-width="3" stroke-dasharray="10,5"/>
+  <path d="M400,400 C350,350 300,325 250,325" fill="none" stroke="#0066cc" stroke-width="3" stroke-dasharray="10,5"/>
+  
+  <!-- Heartbeat line -->
+  <path d="M100,700 L200,700 L250,650 L300,750 L350,600 L400,700 L450,700 L500,650 L550,700 L700,700" 
+        fill="none" stroke="#cc0000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Labels -->
+  <text x="400" y="50" font-family="Arial" font-size="24" font-weight="bold" fill="#990000" text-anchor="middle">Human Heart</text>
+</svg> 
