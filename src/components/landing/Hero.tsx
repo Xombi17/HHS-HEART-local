@@ -41,11 +41,12 @@ const Hero = () => {
         )}
       </div>
       
-      <div className="container mx-auto px-4 py-16 z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+      <div className="container mx-auto px-4 py-8 md:py-16 z-10">
+        <div className="flex flex-col items-center">
+          {/* Text content - Always at the top */}
           <AnimatedSection 
-            animation="slideRight" 
-            className="text-center lg:text-left"
+            animation="fadeIn" 
+            className="text-center mb-8 w-full"
             disabled={reduceAnimations}
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6">
@@ -53,11 +54,12 @@ const Hero = () => {
                 Human Heart
               </span>
             </h1>
-            <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
+            <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
               Discover the wonders of the human heart through our interactive experiences. 
               Explore detailed 3D models, use practical tools, and test your knowledge.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <Link href="/anatomy">
                 <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white shadow-lg transition-all duration-300">
                   Explore Anatomy
@@ -69,8 +71,26 @@ const Hero = () => {
                 </Button>
               </Link>
             </div>
-            
-            <div className="mt-12 flex flex-wrap gap-6 justify-center lg:justify-start">
+          </AnimatedSection>
+          
+          {/* Heart Model - Always below the text */}
+          <AnimatedSection 
+            animation="fadeIn" 
+            className="w-full"
+            disabled={reduceAnimations}
+          >
+            <div className="mx-auto max-w-3xl">
+              <HeartModel />
+            </div>
+          </AnimatedSection>
+          
+          {/* Features section - below heart model */}
+          <AnimatedSection 
+            animation="fadeIn" 
+            className="mt-8 w-full"
+            disabled={reduceAnimations}
+          >
+            <div className="flex flex-wrap gap-6 justify-center">
               <div className="flex items-center">
                 <div className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mr-3">
                   <svg className="w-5 h-5 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -97,20 +117,10 @@ const Hero = () => {
               </div>
             </div>
           </AnimatedSection>
-          
-          <AnimatedSection 
-            animation="slideLeft" 
-            className="order-first lg:order-last"
-            disabled={reduceAnimations}
-          >
-            <div className="relative">
-              <HeartModel />
-            </div>
-          </AnimatedSection>
         </div>
       </div>
       
-      {/* Simplified scroll indicator */}
+      {/* Scroll indicator */}
       {!reduceAnimations && (
         <button 
           onClick={handleScrollToFeatures}
