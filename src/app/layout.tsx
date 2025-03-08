@@ -9,6 +9,7 @@ import PerformanceOptimizer from "@/components/common/PerformanceOptimizer";
 import PerformanceMonitor from "@/components/common/PerformanceMonitor";
 import ServiceWorkerRegistration from "@/components/common/ServiceWorkerRegistration";
 import { ThemeProvider } from "@/context/ThemeContext";
+import PreloadLinks from "@/components/common/PreloadLinks";
 
 // Optimize font loading
 const geistSans = Geist({
@@ -68,6 +69,7 @@ export default function RootLayout({
             <Footer />
             <ScrollToTopButton />
             <ServiceWorkerRegistration />
+            <PreloadLinks />
           </Suspense>
           
           {/* Performance monitoring tool (only visible in development) */}

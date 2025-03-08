@@ -5,18 +5,92 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
+// Device detection for model quality
+function useDeviceCapability() {
+  const [capability, setCapability] = useState<'low' | 'medium' | 'high'>('medium');
+  
+  useEffect(() => {
+    // Only run on client
+    if (typeof window === 'undefined') return;
+    
+    // Check for device capability
+    const checkCapability = () => {
+      // Mobile detection
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth < 768;
+      
+      // GPU checking through canvas performance
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') as WebGLRenderingContext | null;
+      
+      if (!gl) {
+        // WebGL not supported, use low quality
+        return 'low';
+      }
+      
+      // Use performance.now to measure rendering time
+      try {
+        // Check for renderer info
+        let isHighEndGPU = false;
+        
+        try {
+          const extension = gl.getExtension('WEBGL_debug_renderer_info');
+          if (extension) {
+            const renderer = gl.getParameter(extension.UNMASKED_RENDERER_WEBGL) as string;
+            // Check for high-end GPUs
+            isHighEndGPU = /(NVIDIA|AMD|RTX|GTX|Radeon)/i.test(renderer);
+          }
+        } catch (e) {
+          // Renderer info not available, use other detection methods
+        }
+        
+        if (isMobile) {
+          return 'low';
+        } else if (isHighEndGPU) {
+          return 'high';
+        } else {
+          return 'medium';
+        }
+      } catch (e) {
+        // If we can't detect properly, default to medium
+        return isMobile ? 'low' : 'medium';
+      }
+    };
+    
+    setCapability(checkCapability());
+  }, []);
+  
+  return capability;
+}
+
 // Separate the heart model to allow for lazy loading
-function HeartModelObject({ url, heartRate = 70, animationPaused = false, isMobile = false }: { 
+function HeartModelObject({ 
+  url, 
+  heartRate = 70, 
+  animationPaused = false, 
+  isMobile = false,
+  quality = 'medium'
+}: { 
   url: string; 
   heartRate?: number;
   animationPaused?: boolean;
   isMobile?: boolean;
+  quality?: 'low' | 'medium' | 'high';
 }) {
   const heartRef = useRef<THREE.Group>(null);
-  const { scene } = useGLTF(url);
-  const [baseScale] = useState(isMobile ? 2.2 : 2.5); // Slightly smaller scale on mobile
+  const modelRef = useRef<THREE.Group | null>(null);
+  const [baseScale] = useState(isMobile ? 2.2 : 2.5);
   const heartRateRef = useRef(heartRate);
   const lastScaleRef = useRef(baseScale);
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Get the appropriate model URL based on quality
+  const modelUrl = 
+    quality === 'low' ? '/models/heart-low.glb' : 
+    quality === 'high' ? '/models/heart-high.glb' : 
+    url; // medium quality is the default
+  
+  // Load the model
+  const { scene } = useGLTF(modelUrl);
   
   // Update heart rate when prop changes
   useEffect(() => {
@@ -25,21 +99,70 @@ function HeartModelObject({ url, heartRate = 70, animationPaused = false, isMobi
   
   // Optimize the scene
   useEffect(() => {
-    if (scene) {
-      // Lower the polygon count if possible
-      scene.traverse((child) => {
+    if (!scene) return;
+    
+    // Clone the scene for modification
+    if (!modelRef.current) {
+      modelRef.current = scene.clone();
+    }
+    
+    const model = modelRef.current;
+    
+    // Apply quality-specific optimizations
+    if (quality === 'low') {
+      // Low quality optimizations
+      model.traverse((child) => {
         if (child instanceof THREE.Mesh) {
-          // Disable shadows for better performance
+          // Disable shadows
           child.castShadow = false;
           child.receiveShadow = false;
+          
+          // Simplify materials
+          if (child.material) {
+            const material = child.material as THREE.MeshStandardMaterial;
+            material.roughness = 1.0;
+            material.metalness = 0.0;
+            material.flatShading = true;
+            
+            // Remove normal maps and simplify textures
+            material.normalMap = null;
+            material.roughnessMap = null;
+            material.metalnessMap = null;
+          }
+        }
+      });
+    } else if (quality === 'medium') {
+      // Medium quality optimizations
+      model.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          // Basic shadows
+          child.castShadow = false;
+          child.receiveShadow = false;
+          
+          if (child.material) {
+            const material = child.material as THREE.MeshStandardMaterial;
+            // Moderate detail materials
+            material.roughness = 0.7;
+            material.metalness = 0.3;
+          }
+        }
+      });
+    } else {
+      // High quality - keep full detail
+      model.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
         }
       });
     }
-  }, [scene]);
-
+    
+    setIsLoaded(true);
+  }, [scene, quality]);
+  
   // Apply heartbeat animation and subtle rotation
   useFrame((state, delta) => {
-    if (heartRef.current) {
+    if (heartRef.current && isLoaded) {
       // Subtle rotation - reduced on mobile for better performance
       const rotationSpeed = isMobile ? 0.1 : 0.2;
       const rotationAmount = isMobile ? 0.1 : 0.15;
@@ -92,21 +215,22 @@ function HeartModelObject({ url, heartRate = 70, animationPaused = false, isMobi
     <primitive 
       ref={heartRef}
       object={scene} 
-      scale={baseScale} 
+      scale={baseScale}
       position={[0, 0, 0]} 
     />
   );
 }
 
-// Loading placeholder
+// Loading placeholder with progress indicator
 const LoadingPlaceholder = () => (
-  <div className="w-full h-full flex items-center justify-center">
-    <div className="text-red-600 dark:text-red-500">
+  <div className="w-full h-full flex flex-col items-center justify-center">
+    <div className="text-red-600 dark:text-red-500 mb-4">
       <svg className="animate-spin h-12 w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
       </svg>
     </div>
+    <p className="text-gray-600 dark:text-gray-400 text-sm">Loading 3D Heart Model...</p>
   </div>
 );
 
@@ -116,26 +240,14 @@ const HeartModel = () => {
   const [heartRate, setHeartRate] = useState(70);
   const [animationPaused, setAnimationPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-
-  // Detect mobile devices on mount
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    // Check initially
-    checkMobile();
-    
-    // Listen for resize events
-    window.addEventListener('resize', checkMobile);
-    
-    // Cleanup
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
+  const deviceCapability = useDeviceCapability();
+  
   // Only render the 3D model when it's visible in the viewport
   useEffect(() => {
     if (!containerRef.current) return;
+    
+    // Check if mobile
+    setIsMobile(window.innerWidth < 768);
     
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -153,6 +265,37 @@ const HeartModel = () => {
     };
   }, []);
 
+  // Performance monitoring
+  const [fps, setFps] = useState<number | null>(null);
+  
+  useEffect(() => {
+    if (!isVisible || typeof window === 'undefined') return;
+    
+    let frameCount = 0;
+    let lastTime = performance.now();
+    let frameId: number;
+    
+    const measureFps = () => {
+      frameCount++;
+      const now = performance.now();
+      
+      // Update FPS every second
+      if (now - lastTime > 1000) {
+        setFps(Math.round((frameCount * 1000) / (now - lastTime)));
+        frameCount = 0;
+        lastTime = now;
+      }
+      
+      frameId = requestAnimationFrame(measureFps);
+    };
+    
+    frameId = requestAnimationFrame(measureFps);
+    
+    return () => {
+      cancelAnimationFrame(frameId);
+    };
+  }, [isVisible]);
+  
   return (
     <div 
       ref={containerRef} 
@@ -165,20 +308,21 @@ const HeartModel = () => {
             dpr={[1, isMobile ? 1.5 : 2]} // Lower pixel ratio for mobile
             performance={{ min: isMobile ? 0.4 : 0.5 }} // Allow more performance drop on mobile
             gl={{ 
-              antialias: false,
-              powerPreference: 'high-performance'
+              antialias: deviceCapability !== 'low', // Only use antialiasing for medium/high capability
+              powerPreference: 'high-performance',
+              precision: deviceCapability === 'low' ? 'mediump' : 'highp'
             }}
           >
-            {/* Base ambient lighting - simplified on mobile */}
+            {/* Base ambient lighting - adaptive based on device capability */}
             <ambientLight intensity={1.0} />
             <hemisphereLight args={['#ffffff', '#8080ff', 1.0]} />
             
-            {/* Primary spotlights - reduced number on mobile */}
+            {/* Primary spotlights - reduced for low-end devices */}
             <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1.5} />
             <spotLight position={[-10, -10, -10]} angle={0.15} penumbra={1} intensity={1.2} />
             
-            {/* Conditional lights based on device type */}
-            {!isMobile && (
+            {/* Conditional lights based on device capability */}
+            {deviceCapability !== 'low' && (
               <>
                 <spotLight position={[0, -15, 0]} angle={0.5} penumbra={0.8} intensity={1.0} />
                 <directionalLight position={[0, 0, 5]} intensity={0.8} />
@@ -186,13 +330,23 @@ const HeartModel = () => {
               </>
             )}
             
-            {/* Point lights - reduced on mobile */}
-            {isMobile ? (
+            {/* Point lights - reduced on low-end devices */}
+            {deviceCapability === 'low' ? (
+              // Minimal lighting for low-end devices
               <>
                 <pointLight position={[5, 5, 5]} intensity={0.7} />
                 <pointLight position={[-5, -5, -5]} intensity={0.7} />
               </>
+            ) : deviceCapability === 'medium' ? (
+              // Medium lighting setup
+              <>
+                <pointLight position={[5, 5, 5]} intensity={0.5} />
+                <pointLight position={[-5, 5, 5]} intensity={0.5} />
+                <pointLight position={[5, -5, 5]} intensity={0.5} />
+                <pointLight position={[-5, -5, 5]} intensity={0.5} />
+              </>
             ) : (
+              // Full lighting for high-end devices
               <>
                 <pointLight position={[5, 5, 5]} intensity={0.5} />
                 <pointLight position={[-5, 5, 5]} intensity={0.5} />
@@ -211,6 +365,7 @@ const HeartModel = () => {
                 heartRate={heartRate} 
                 animationPaused={animationPaused}
                 isMobile={isMobile}
+                quality={deviceCapability}
               />
             </Suspense>
             <OrbitControls 
@@ -229,16 +384,25 @@ const HeartModel = () => {
           <div className="absolute bottom-4 left-4 right-4 flex flex-col items-start bg-white/80 dark:bg-gray-900/80 p-3 rounded text-xs md:text-sm text-gray-600 dark:text-gray-300">
             <div className="flex items-center w-full justify-between mb-3">
               <span className="font-medium">Heart Model Controls</span>
-              <button
-                onClick={() => setAnimationPaused(!animationPaused)}
-                className={`px-4 py-2 rounded-md font-medium text-sm transition-colors ${
-                  animationPaused 
-                    ? 'bg-red-600 text-white hover:bg-red-700' 
-                    : 'bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600'
-                }`}
-              >
-                {animationPaused ? 'Resume' : 'Pause'}
-              </button>
+              <div className="flex items-center">
+                {fps !== null && deviceCapability !== 'low' && (
+                  <div className={`text-xs mr-3 ${
+                    fps > 30 ? 'text-green-600' : fps > 20 ? 'text-yellow-600' : 'text-red-600'
+                  }`}>
+                    {fps} FPS
+                  </div>
+                )}
+                <button
+                  onClick={() => setAnimationPaused(!animationPaused)}
+                  className={`px-4 py-2 rounded-md font-medium text-sm transition-colors ${
+                    animationPaused 
+                      ? 'bg-red-600 text-white hover:bg-red-700' 
+                      : 'bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600'
+                  }`}
+                >
+                  {animationPaused ? 'Resume' : 'Pause'}
+                </button>
+              </div>
             </div>
             
             <div className="flex flex-col w-full">
@@ -261,7 +425,12 @@ const HeartModel = () => {
             </div>
             
             <div className="w-full text-xs opacity-80 mt-2 text-center">
-              Drag to rotate | Pinch or scroll to zoom
+              <div className="flex items-center justify-between">
+                <span>Drag to rotate | Pinch or scroll to zoom</span>
+                <span className="text-xs opacity-70">
+                  Quality: {deviceCapability === 'low' ? 'Low' : deviceCapability === 'medium' ? 'Medium' : 'High'}
+                </span>
+              </div>
             </div>
           </div>
         </>
