@@ -5,6 +5,7 @@ import TestimonialSection from "@/components/landing/TestimonialSection";
 import CtaSection from "@/components/landing/CtaSection";
 import SectionDivider from "@/components/common/SectionDivider";
 import { Suspense } from "react";
+import AnimatedSection from "@/components/common/AnimatedSection";
 
 // Lazy loading placeholder for sections
 const SectionPlaceholder = () => (
@@ -17,11 +18,15 @@ export default function Home() {
   return (
     <main className="overflow-hidden">
       <Suspense fallback={<SectionPlaceholder />}>
-        <Hero />
+        <AnimatedSection animation="fadeIn" threshold={0.1} triggerOnce={true}>
+          <Hero />
+        </AnimatedSection>
       </Suspense>
       
       <Suspense fallback={<SectionPlaceholder />}>
-        <FeatureHighlights />
+        <AnimatedSection animation="fadeIn" threshold={0.1} triggerOnce={true}>
+          <FeatureHighlights />
+        </AnimatedSection>
       </Suspense>
       
       <Suspense fallback={<SectionPlaceholder />}>
@@ -29,15 +34,21 @@ export default function Home() {
       </Suspense>
       
       <Suspense fallback={<SectionPlaceholder />}>
-        <StatsSection />
+        <AnimatedSection animation="fadeIn" threshold={0.1} triggerOnce={true}>
+          <StatsSection />
+        </AnimatedSection>
       </Suspense>
       
       <Suspense fallback={<SectionPlaceholder />}>
-        <TestimonialSection />
+        <AnimatedSection animation="fadeIn" threshold={0.1} triggerOnce={true}>
+          <TestimonialSection />
+        </AnimatedSection>
       </Suspense>
       
       <Suspense fallback={<SectionPlaceholder />}>
-        <CtaSection />
+        <AnimatedSection animation="fadeIn" threshold={0.1} triggerOnce={true}>
+          <CtaSection />
+        </AnimatedSection>
       </Suspense>
     </main>
   );
