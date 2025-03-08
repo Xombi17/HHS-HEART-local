@@ -91,8 +91,10 @@ const HeartModel = () => {
         >
           <ambientLight intensity={0.8} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1.5} />
-          <spotLight position={[-10, -10, -10]} angle={0.15} penumbra={1} intensity={0.5} />
+          <spotLight position={[-10, -10, -10]} angle={0.15} penumbra={1} intensity={1.2} />
+          <spotLight position={[0, -15, 0]} angle={0.5} penumbra={0.8} intensity={1.0} />
           <directionalLight position={[0, 0, 5]} intensity={0.8} />
+          <directionalLight position={[0, 0, -5]} intensity={0.6} />
           <Suspense fallback={null}>
             <HeartModelObject url="/models/heart.glb" />
           </Suspense>
