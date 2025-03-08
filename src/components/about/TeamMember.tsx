@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 export interface TeamMemberProps {
   name: string;
-  role: string;
+  role?: string;
   imageSrc: string;
   socialLinks?: {
     linkedin?: string;
@@ -35,9 +35,11 @@ const TeamMember: React.FC<TeamMemberProps> = ({
         <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
           {name}
         </h3>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-          {role}
-        </p>
+        {role && (
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            {role}
+          </p>
+        )}
         
         {socialLinks && (
           <div className="flex justify-center space-x-4">
