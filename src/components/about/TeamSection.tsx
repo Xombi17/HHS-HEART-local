@@ -8,7 +8,6 @@ import AnimatedSection from '../common/AnimatedSection';
 const placeholderTeam: TeamMemberProps[] = [
   {
     name: 'Varad Joshi',
-    role: 'Team Lead',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
@@ -18,7 +17,6 @@ const placeholderTeam: TeamMemberProps[] = [
   },
   {
     name: 'Anushka Kedare',
-    role: 'Medical Content Specialist',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
@@ -27,7 +25,6 @@ const placeholderTeam: TeamMemberProps[] = [
   },
   {
     name: 'Manvith Karkera',
-    role: 'Lead Developer',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
@@ -37,7 +34,6 @@ const placeholderTeam: TeamMemberProps[] = [
   },
   {
     name: 'Delisha Duarte',
-    role: 'UI/UX Designer',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
@@ -46,7 +42,6 @@ const placeholderTeam: TeamMemberProps[] = [
   },
   {
     name: 'Komal Kanojiya',
-    role: 'Educational Content Developer',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
@@ -55,7 +50,6 @@ const placeholderTeam: TeamMemberProps[] = [
   },
   {
     name: 'Arjun Kharche',
-    role: 'Frontend Developer',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       github: 'https://github.com',
@@ -64,7 +58,6 @@ const placeholderTeam: TeamMemberProps[] = [
   },
   {
     name: 'Joshua Jimmy',
-    role: 'Backend Developer',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       github: 'https://github.com',
@@ -74,7 +67,6 @@ const placeholderTeam: TeamMemberProps[] = [
   },
   {
     name: 'Tuhin Jalui',
-    role: 'Interactive Tools Specialist',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
@@ -83,7 +75,6 @@ const placeholderTeam: TeamMemberProps[] = [
   },
   {
     name: 'Vedank Kator',
-    role: '3D Modeling Expert',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
@@ -92,7 +83,6 @@ const placeholderTeam: TeamMemberProps[] = [
   },
   {
     name: 'Chrism Fernandes',
-    role: 'Quality Assurance Specialist',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
@@ -101,7 +91,6 @@ const placeholderTeam: TeamMemberProps[] = [
   },
   {
     name: 'Nethan Gonsalves',
-    role: 'Content Researcher',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
@@ -136,7 +125,6 @@ const TeamSection: React.FC<TeamSectionProps> = ({ teamMembers = placeholderTeam
             >
               <TeamMember 
                 name={member.name}
-                role={member.role}
                 imageSrc={member.imageSrc}
                 socialLinks={member.socialLinks}
               />
