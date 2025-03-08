@@ -1,79 +1,57 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import AnimatedSection from '../common/AnimatedSection';
 
 const stats = [
   {
-    value: '100K+',
-    label: 'Heartbeats per day',
-    description: 'Your heart beats approximately 100,000 times every day, pumping about 2,000 gallons of blood.'
+    value: '100,000+',
+    label: 'Heartbeats per Day',
+    description: 'Your heart works tirelessly, beating over 100,000 times every day to keep you alive.'
   },
   {
-    value: '11K',
-    label: 'Miles of blood vessels',
-    description: 'The human body contains about 60,000 miles of blood vessels, enough to circle the Earth more than twice.'
+    value: '60,000',
+    label: 'Miles of Blood Vessels',
+    description: 'The total length of blood vessels in an adult human body, enough to circle Earth twice.'
   },
   {
-    value: '5L',
-    label: 'Blood pumped per minute',
-    description: 'Your heart pumps about 5 liters of blood through your body every minute.'
+    value: '2,000',
+    label: 'Gallons per Day',
+    description: 'The amount of blood pumped by your heart daily, equivalent to about 2,000 gallons.'
   },
   {
-    value: '2B+',
-    label: 'Heartbeats in a lifetime',
-    description: 'The average heart will beat more than 2.5 billion times during a typical lifetime.'
+    value: '2.5B',
+    label: 'Lifetime Heartbeats',
+    description: 'The average heart beats about 2.5 billion times over a lifetime.'
   }
 ];
 
 const StatsSection = () => {
-  const [reduceAnimations, setReduceAnimations] = useState(false);
-  
-  useEffect(() => {
-    // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    setReduceAnimations(prefersReducedMotion);
-  }, []);
-
   return (
-    <section className="py-20 bg-gradient-to-b from-red-50 to-white dark:from-gray-800 dark:to-gray-900">
+    <section className="bg-gray-900 py-20">
       <div className="container mx-auto px-4">
-        <AnimatedSection 
-          animation="slideUp" 
-          className="text-center mb-16"
-          disabled={reduceAnimations}
-        >
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+        <AnimatedSection animation="slideUp" className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-white mb-6">
             Heart Facts That Matter
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Discover fascinating statistics about the human heart, one of the most remarkable organs in the body
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Discover fascinating statistics about the human heart, one of the most remarkable organs in your body
           </p>
         </AnimatedSection>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
-            <AnimatedSection 
-              key={index} 
-              animation="fadeIn" 
-              delay={reduceAnimations ? 0 : Math.min(index * 100, 300)}
-              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 text-center transition-shadow duration-300 hover:shadow-xl"
-              disabled={reduceAnimations}
+            <AnimatedSection
+              key={index}
+              animation="fadeIn"
+              delay={index * 200}
+              className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 border border-gray-700"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 dark:bg-red-900/30 mb-6 mx-auto">
-                <svg className="w-8 h-8 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-white mb-2">{stat.value}</div>
+                <div className="text-lg font-semibold text-gray-300 mb-4">{stat.label}</div>
+                <p className="text-gray-400">{stat.description}</p>
               </div>
-              <div className="text-4xl font-bold text-red-600 dark:text-red-500 mb-2">
-                {stat.value}
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                {stat.label}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                {stat.description}
-              </p>
             </AnimatedSection>
           ))}
         </div>

@@ -25,7 +25,7 @@ export default function Home() {
       </Suspense>
       
       <Suspense fallback={<SectionPlaceholder />}>
-        <SectionDivider from="from-white" to="to-red-50" height="h-16" wave={true} />
+        <SectionDivider from="from-gray-900" to="to-gray-900" height="h-0" wave={false} />
       </Suspense>
       
       <Suspense fallback={<SectionPlaceholder />}>
