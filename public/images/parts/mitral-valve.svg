@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="400" fill="white"/>
+  
+  <!-- Heart outline (faded) -->
+  <path d="M200,325 C275,275 350,200 350,125 C350,75 310,50 275,50 C240,50 215,75 200,100 C185,75 160,50 125,50 C90,50 50,75 50,125 C50,200 125,275 200,325 Z" 
+        fill="#f8d0d0" stroke="#cc0000" stroke-width="1" opacity="0.3"/>
+  
+  <!-- Left Atrium (faded) -->
+  <path d="M275,100 C300,100 325,115 325,150 C325,175 300,190 275,190 L240,190 L240,100 L275,100 Z" 
+        fill="#f2a5a5" stroke="#cc0000" stroke-width="1" opacity="0.5"/>
+  <text x="260" y="145" font-family="Arial" font-size="24" fill="#990000" opacity="0.5">LA</text>
+  
+  <!-- Left Ventricle (faded) -->
+  <path d="M275,190 C300,190 325,210 325,250 C325,290 275,310 240,310 L240,190 L275,190 Z" 
+        fill="#e06666" stroke="#cc0000" stroke-width="1" opacity="0.5"/>
+  <text x="260" y="250" font-family="Arial" font-size="24" fill="#990000" opacity="0.5">LV</text>
+  
+  <!-- Mitral Valve (highlighted) -->
+  <ellipse cx="240" cy="190" rx="15" ry="5" fill="#ffffff" stroke="#cc0000" stroke-width="3"/>
+  <path d="M230,190 L250,190" stroke="#cc0000" stroke-width="3"/>
+  <path d="M225,185 L255,185" stroke="#cc0000" stroke-width="1"/>
+  <path d="M225,195 L255,195" stroke="#cc0000" stroke-width="1"/>
+  
+  <!-- Valve flaps -->
+  <path d="M240,190 C245,180 250,185 250,190" fill="none" stroke="#cc0000" stroke-width="2"/>
+  <path d="M240,190 C235,180 230,185 230,190" fill="none" stroke="#cc0000" stroke-width="2"/>
+  
+  <text x="240" y="170" font-family="Arial" font-size="14" fill="#990000" text-anchor="middle">Mitral Valve</text>
+  
+  <!-- Title -->
+  <text x="200" y="370" font-family="Arial" font-size="24" font-weight="bold" fill="#990000" text-anchor="middle">Mitral Valve</text>
+</svg> 
