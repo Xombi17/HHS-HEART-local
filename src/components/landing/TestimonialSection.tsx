@@ -6,18 +6,18 @@ import AnimatedSection from '../common/AnimatedSection';
 const testimonials = [
   {
     quote: "The 3D heart model and interactive tools have completely transformed how I teach cardiac anatomy to my students.",
-    author: "Dr. Sarah Johnson",
-    title: "Professor of Anatomy"
+    author: "",
+    title: ""
   },
   {
     quote: "As a medical student, I found the heart rate simulator and anatomy explorer incredibly helpful for understanding complex concepts.",
-    author: "Michael Chen",
-    title: "Medical Student"
+    author: "",
+    title: ""
   },
   {
     quote: "The interactive quizzes helped me prepare for my exams. The visual approach makes learning about the heart much more engaging.",
-    author: "Emma Rodriguez",
-    title: "Nursing Student"
+    author: "",
+    title: ""
   }
 ];
 
