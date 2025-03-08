@@ -7,56 +7,80 @@ import AnimatedSection from '../common/AnimatedSection';
 // Placeholder team data - replace with actual team data
 const placeholderTeam: TeamMemberProps[] = [
   {
-    name: 'Dr. Sarah Johnson',
-    role: 'Medical Director',
+    name: 'Varad Joshi',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
-      twitter: 'https://twitter.com',
-      email: 'sarah@hhsheart.org'
+      github: 'https://github.com',
+      email: 'varad@hhsheart.org'
     }
   },
   {
-    name: 'Prof. Michael Chen',
-    role: 'Lead Cardiologist',
+    name: 'Anushka Kedare',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
-      email: 'michael@hhsheart.org'
-    }
-  },
-  {
-    name: 'Emma Rodriguez',
-    role: 'Educational Content Director',
-    imageSrc: '/images/team/placeholder.svg',
-    socialLinks: {
-      linkedin: 'https://linkedin.com',
-      twitter: 'https://twitter.com',
       github: 'https://github.com'
     }
   },
   {
-    name: 'Dr. James Wilson',
-    role: 'Research Lead',
+    name: 'Manvith Karkera',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
-      email: 'james@hhsheart.org'
+      github: 'https://github.com'
     }
   },
   {
-    name: 'Alex Thompson',
-    role: 'Lead Developer',
+    name: 'Delisha Duarte',
+    imageSrc: '/images/team/placeholder.svg',
+    socialLinks: {
+      linkedin: 'https://linkedin.com',
+      email: 'delisha@hhsheart.org'
+    }
+  },
+  {
+    name: 'Komal Kanojiya',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       github: 'https://github.com',
+      linkedin: 'https://linkedin.com'
+    }
+  },
+  {
+    name: 'Arjun Kharche',
+    imageSrc: '/images/team/placeholder.svg',
+    socialLinks: {
+      linkedin: 'https://linkedin.com',
+      email: 'arjun@hhsheart.org'
+    }
+  },
+  {
+    name: 'Joshua Jimmy',
+    imageSrc: '/images/team/placeholder.svg',
+    socialLinks: {
       linkedin: 'https://linkedin.com',
       twitter: 'https://twitter.com'
     }
   },
   {
-    name: 'Olivia Parker',
-    role: 'UX/UI Designer',
+    name: 'Tuhin Jalui',
+    imageSrc: '/images/team/placeholder.svg',
+    socialLinks: {
+      linkedin: 'https://linkedin.com',
+      email: 'tuhin@hhsheart.org'
+    }
+  },
+  {
+    name: 'Vedank Kator',
+    imageSrc: '/images/team/placeholder.svg',
+    socialLinks: {
+      github: 'https://github.com',
+      linkedin: 'https://linkedin.com'
+    }
+  },
+  {
+    name: 'Chrism Fernandes',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
@@ -64,17 +88,7 @@ const placeholderTeam: TeamMemberProps[] = [
     }
   },
   {
-    name: 'Dr. David Kim',
-    role: 'Medical Consultant',
-    imageSrc: '/images/team/placeholder.svg',
-    socialLinks: {
-      linkedin: 'https://linkedin.com',
-      email: 'david@hhsheart.org'
-    }
-  },
-  {
-    name: 'Sophia Martinez',
-    role: 'Educational Specialist',
+    name: 'Nethan Gonsalves',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
@@ -109,7 +123,6 @@ const TeamSection: React.FC<TeamSectionProps> = ({ teamMembers = placeholderTeam
             >
               <TeamMember 
                 name={member.name}
-                role={member.role}
                 imageSrc={member.imageSrc}
                 socialLinks={member.socialLinks}
               />
