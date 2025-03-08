@@ -41,25 +41,26 @@ const Hero = () => {
         )}
       </div>
       
-      <div className="container mx-auto px-4 py-8 md:py-16 z-10">
-        <div className="flex flex-col items-center">
-          {/* Text content - Always at the top */}
+      <div className="container mx-auto px-4 py-16 z-10">
+        {/* Mobile layout (stacked with text at top) - shown on small screens only */}
+        <div className="flex flex-col items-center md:hidden">
+          {/* Text content */}
           <AnimatedSection 
             animation="fadeIn" 
             className="text-center mb-8 w-full"
             disabled={reduceAnimations}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
               Explore the <span className="text-red-600 dark:text-red-500">
                 Human Heart
               </span>
             </h1>
-            <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
               Discover the wonders of the human heart through our interactive experiences. 
               Explore detailed 3D models, use practical tools, and test your knowledge.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
               <Link href="/anatomy">
                 <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white shadow-lg transition-all duration-300">
                   Explore Anatomy
@@ -73,24 +74,82 @@ const Hero = () => {
             </div>
           </AnimatedSection>
           
-          {/* Heart Model - Always below the text */}
+          {/* Heart Model */}
           <AnimatedSection 
             animation="fadeIn" 
             className="w-full"
             disabled={reduceAnimations}
           >
-            <div className="mx-auto max-w-3xl">
+            <div className="mx-auto">
               <HeartModel />
             </div>
           </AnimatedSection>
           
-          {/* Features section - below heart model */}
+          {/* Features */}
           <AnimatedSection 
             animation="fadeIn" 
-            className="mt-8 w-full"
+            className="mt-6 w-full"
             disabled={reduceAnimations}
           >
-            <div className="flex flex-wrap gap-6 justify-center">
+            <div className="flex flex-wrap gap-4 justify-center">
+              <div className="flex items-center">
+                <div className="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mr-2">
+                  <svg className="w-4 h-4 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <span className="text-sm text-gray-700 dark:text-gray-300">Interactive 3D Model</span>
+              </div>
+              <div className="flex items-center">
+                <div className="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mr-2">
+                  <svg className="w-4 h-4 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <span className="text-sm text-gray-700 dark:text-gray-300">Educational Content</span>
+              </div>
+              <div className="flex items-center">
+                <div className="w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mr-2">
+                  <svg className="w-4 h-4 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <span className="text-sm text-gray-700 dark:text-gray-300">Practical Tools</span>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+        
+        {/* Desktop layout (original 2-column) - hidden on small screens */}
+        <div className="hidden md:grid md:grid-cols-2 md:gap-8 md:items-center">
+          <AnimatedSection 
+            animation="slideRight" 
+            className="text-left"
+            disabled={reduceAnimations}
+          >
+            <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+              Explore the <span className="text-red-600 dark:text-red-500">
+                Human Heart
+              </span>
+            </h1>
+            <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
+              Discover the wonders of the human heart through our interactive experiences. 
+              Explore detailed 3D models, use practical tools, and test your knowledge.
+            </p>
+            <div className="flex flex-row gap-4 justify-start">
+              <Link href="/anatomy">
+                <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white shadow-lg transition-all duration-300">
+                  Explore Anatomy
+                </Button>
+              </Link>
+              <Link href="/tools">
+                <Button variant="outline" size="lg" className="border-2 border-red-600 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-300">
+                  Try Interactive Tools
+                </Button>
+              </Link>
+            </div>
+            
+            <div className="mt-12 flex flex-wrap gap-6 justify-start">
               <div className="flex items-center">
                 <div className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mr-3">
                   <svg className="w-5 h-5 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -115,6 +174,16 @@ const Hero = () => {
                 </div>
                 <span className="text-gray-700 dark:text-gray-300">Practical Tools</span>
               </div>
+            </div>
+          </AnimatedSection>
+          
+          <AnimatedSection 
+            animation="slideLeft" 
+            className=""
+            disabled={reduceAnimations}
+          >
+            <div className="relative">
+              <HeartModel />
             </div>
           </AnimatedSection>
         </div>
