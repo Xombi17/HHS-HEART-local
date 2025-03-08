@@ -6,11 +6,16 @@ import { OrbitControls, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
 // Separate the heart model to allow for lazy loading
-function HeartModelObject({ url, heartRate = 70 }: { url: string; heartRate?: number }) {
+function HeartModelObject({ url, heartRate = 70, animationPaused = false }: { 
+  url: string; 
+  heartRate?: number;
+  animationPaused?: boolean;
+}) {
   const heartRef = useRef<THREE.Group>(null);
   const { scene } = useGLTF(url);
   const [baseScale] = useState(2.5);
   const heartRateRef = useRef(heartRate);
+  const lastScaleRef = useRef(baseScale);
   
   // Update heart rate when prop changes
   useEffect(() => {
@@ -36,6 +41,15 @@ function HeartModelObject({ url, heartRate = 70 }: { url: string; heartRate?: nu
     if (heartRef.current) {
       // Subtle rotation for dynamic viewing
       heartRef.current.rotation.y = Math.sin(state.clock.getElapsedTime() * 0.2) * 0.15;
+      
+      // Skip animation if paused
+      if (animationPaused) {
+        // If paused, ensure the heart stays at its normal size
+        if (heartRef.current.scale.x !== baseScale) {
+          heartRef.current.scale.set(baseScale, baseScale, baseScale);
+        }
+        return;
+      }
       
       // Calculate the heartbeat phase (0 to 1)
       const heartbeatFrequency = heartRateRef.current / 60; // Convert BPM to beats per second
@@ -65,11 +79,9 @@ function HeartModelObject({ url, heartRate = 70 }: { url: string; heartRate?: nu
       }
       
       // Apply the scaling to the heart model
-      heartRef.current.scale.set(
-        baseScale * scaleFactor,
-        baseScale * scaleFactor,
-        baseScale * scaleFactor
-      );
+      const newScale = baseScale * scaleFactor;
+      heartRef.current.scale.set(newScale, newScale, newScale);
+      lastScaleRef.current = newScale;
     }
   });
 
@@ -99,6 +111,7 @@ const HeartModel = () => {
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const [heartRate, setHeartRate] = useState(70);
+  const [animationPaused, setAnimationPaused] = useState(false);
 
   // Only render the 3D model when it's visible in the viewport
   useEffect(() => {
@@ -157,7 +170,11 @@ const HeartModel = () => {
             <pointLight position={[-5, -5, -5]} intensity={0.5} />
             
             <Suspense fallback={null}>
-              <HeartModelObject url="/models/heart.glb" heartRate={heartRate} />
+              <HeartModelObject 
+                url="/models/heart.glb" 
+                heartRate={heartRate} 
+                animationPaused={animationPaused}
+              />
             </Suspense>
             <OrbitControls 
               enablePan={false}
@@ -170,19 +187,32 @@ const HeartModel = () => {
             />
           </Canvas>
           
-          <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-white/80 dark:bg-gray-900/80 p-2 rounded text-xs text-gray-600 dark:text-gray-300">
+          <div className="absolute bottom-4 left-4 right-4 flex flex-col md:flex-row items-start md:items-center justify-between bg-white/80 dark:bg-gray-900/80 p-2 rounded text-xs text-gray-600 dark:text-gray-300">
             <span>Drag to rotate | Scroll to zoom</span>
-            <div className="flex items-center ml-4">
-              <span className="mr-2">Heart Rate: {heartRate} BPM</span>
-              <input 
-                type="range" 
-                min="40" 
-                max="180"
-                step="1"
-                value={heartRate}
-                onChange={(e) => setHeartRate(parseInt(e.target.value))}
-                className="w-32 h-2 bg-red-200 rounded-lg appearance-none cursor-pointer dark:bg-red-700"
-              />
+            <div className="flex flex-col md:flex-row items-start md:items-center mt-2 md:mt-0">
+              <button
+                onClick={() => setAnimationPaused(!animationPaused)}
+                className={`mr-4 px-3 py-1 rounded-md font-medium transition-colors ${
+                  animationPaused 
+                    ? 'bg-red-600 text-white hover:bg-red-700' 
+                    : 'bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600'
+                }`}
+              >
+                {animationPaused ? 'Resume Animation' : 'Pause Animation'}
+              </button>
+              <div className="flex items-center mt-2 md:mt-0">
+                <span className="mr-2">Heart Rate: {heartRate} BPM</span>
+                <input 
+                  type="range" 
+                  min="40" 
+                  max="180"
+                  step="1"
+                  value={heartRate}
+                  onChange={(e) => setHeartRate(parseInt(e.target.value))}
+                  className="w-32 h-2 bg-red-200 rounded-lg appearance-none cursor-pointer dark:bg-red-700"
+                  disabled={animationPaused}
+                />
+              </div>
             </div>
           </div>
         </>
