@@ -8,11 +8,11 @@ import AnimatedSection from '../common/AnimatedSection';
 const placeholderTeam: TeamMemberProps[] = [
   {
     name: 'Varad Joshi',
-    imageSrc: '/images/team/avatars/male-avatar.svg',
+    imageSrc: '/images/team/avatars/varad-joshi.jpg',
     socialLinks: {
-      linkedin: 'https://linkedin.com',
-      github: 'https://github.com',
-      email: 'varad@hhsheart.org'
+      linkedin: 'https://www.linkedin.com/in/varad-amit-joshi/',
+      github: 'https://github.com/Xombi17',
+      email: 'varadaj47@gmail.com'
     }
   },
   {
@@ -20,7 +20,7 @@ const placeholderTeam: TeamMemberProps[] = [
     imageSrc: '/images/team/avatars/female-avatar.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
-      email: 'anushka@hhsheart.org'
+      email: 'anushkakedare14@gmail.com'
     }
   },
   {

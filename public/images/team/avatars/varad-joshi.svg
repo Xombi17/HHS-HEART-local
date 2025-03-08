@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <!-- Background -->
+  <circle cx="50" cy="50" r="50" fill="#f2f2f2" />
+  
+  <!-- Hoodie -->
+  <path d="M25 85 C25 65 30 55 50 55 C70 55 75 65 75 85 Z" fill="#646e78" />
+  <path d="M38 75 L38 60 L62 60 L62 75" stroke="#ffffff" stroke-width="2" fill="none" />
+  
+  <!-- Neck -->
+  <path d="M43 55 L43 60 L57 60 L57 55" fill="#f0e0d0" />
+  
+  <!-- Face -->
+  <ellipse cx="50" cy="40" rx="23" ry="25" fill="#f0e0d0" />
+  
+  <!-- Hair -->
+  <path d="M50 15 Q38 15 32 25 Q28 32 27 40 L35 40 Q38 30 45 25 L50 25 L55 25 Q62 30 65 40 L73 40 Q72 32 68 25 Q62 15 50 15 Z" 
+        fill="#7C4626" />
+  
+  <!-- Pointed hair on top -->
+  <path d="M50 15 L45 10 L50 5 L55 10 L50 15" fill="#7C4626" />
+  <path d="M40 18 L35 12 L38 8 L43 14 L40 18" fill="#7C4626" />
+  <path d="M60 18 L65 12 L62 8 L57 14 L60 18" fill="#7C4626" />
+</svg> 
