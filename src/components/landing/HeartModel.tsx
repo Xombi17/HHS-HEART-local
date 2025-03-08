@@ -89,12 +89,29 @@ const HeartModel = () => {
             powerPreference: 'high-performance'
           }}
         >
-          <ambientLight intensity={0.8} />
+          {/* Base ambient lighting */}
+          <ambientLight intensity={1.0} />
+          <hemisphereLight args={['#ffffff', '#8080ff', 1.0]} />
+          
+          {/* Primary spotlights from different angles */}
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1.5} />
           <spotLight position={[-10, -10, -10]} angle={0.15} penumbra={1} intensity={1.2} />
           <spotLight position={[0, -15, 0]} angle={0.5} penumbra={0.8} intensity={1.0} />
+          
+          {/* Directional lights for overall illumination */}
           <directionalLight position={[0, 0, 5]} intensity={0.8} />
           <directionalLight position={[0, 0, -5]} intensity={0.6} />
+          
+          {/* Corner-specific point lights */}
+          <pointLight position={[5, 5, 5]} intensity={0.5} />
+          <pointLight position={[-5, 5, 5]} intensity={0.5} />
+          <pointLight position={[5, -5, 5]} intensity={0.5} />
+          <pointLight position={[-5, -5, 5]} intensity={0.5} />
+          <pointLight position={[5, 5, -5]} intensity={0.5} />
+          <pointLight position={[-5, 5, -5]} intensity={0.5} />
+          <pointLight position={[5, -5, -5]} intensity={0.5} />
+          <pointLight position={[-5, -5, -5]} intensity={0.5} />
+          
           <Suspense fallback={null}>
             <HeartModelObject url="/models/heart.glb" />
           </Suspense>
