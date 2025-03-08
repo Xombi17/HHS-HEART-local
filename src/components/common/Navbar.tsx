@@ -56,13 +56,13 @@ const Navbar = () => {
 
   return (
     <nav className={navbarClass}>
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-4 py-4 text-white">
         <div className="flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold text-red-500 flex items-center group">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mr-2 transition-transform duration-500 group-hover:scale-110 group-hover:text-red-400" viewBox="0 0 24 24" fill="currentColor">
+          <Link href="/" className="text-2xl font-bold text-white flex items-center group">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mr-2 transition-transform duration-500 group-hover:scale-110 text-red-500 group-hover:text-red-400" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
             </svg>
-            <span className="relative">
+            <span className="relative text-white">
               HHS Heart
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-500 group-hover:w-full transition-all duration-300"></span>
             </span>
@@ -89,8 +89,8 @@ const Navbar = () => {
             </NavLink>
             <Link href="/anatomy" className="ml-4">
               <button className="relative overflow-hidden bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-full transition-colors duration-300 flex items-center group">
-                <span className="relative z-10">Explore Heart</span>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 relative z-10 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
+                <span className="relative z-10 text-white">Explore Heart</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 relative z-10 transition-transform duration-300 group-hover:translate-x-1 text-white" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
                 <span className="absolute inset-0 bg-white/20 transform -translate-x-full skew-x-12 transition-transform duration-500 ease-out group-hover:translate-x-0"></span>
@@ -105,11 +105,11 @@ const Navbar = () => {
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
               {isMenuOpen ? (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
               )}
@@ -119,7 +119,7 @@ const Navbar = () => {
         
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 py-4 bg-gray-800 rounded-lg shadow-lg animate-fadeIn">
+          <div className="md:hidden mt-4 py-4 bg-gray-800 rounded-lg shadow-lg animate-fadeIn text-white">
             <div className="flex flex-col space-y-4 px-4">
               <MobileNavLink href="/" isActive={pathname === '/'} onClick={handleNavLinkClick}>
                 Home
@@ -141,8 +141,8 @@ const Navbar = () => {
               </MobileNavLink>
               <Link href="/anatomy" className="mt-2">
                 <button className="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-full transition-colors duration-300 flex items-center justify-center group">
-                  <span>Explore Heart</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
+                  <span className="text-white">Explore Heart</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 transition-transform duration-300 group-hover:translate-x-1 text-white" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
                 </button>
@@ -170,19 +170,16 @@ const NavLink = ({
   return (
     <Link 
       href={href} 
-      className={`relative px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 overflow-hidden group ${
+      className={`relative px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 overflow-hidden group text-white ${
         isActive 
-          ? 'text-red-400 bg-red-900/20' 
-          : 'text-white hover:text-red-300'
+          ? 'bg-gray-800' 
+          : 'hover:bg-gray-800/50'
       }`}
       onClick={(e) => onClick(e, href)}
     >
       <span className="relative z-10">{children}</span>
       {!isActive && (
         <span className="absolute bottom-0 left-0 w-full h-0.5 bg-red-500 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
-      )}
-      {!isActive && (
-        <span className="absolute inset-0 bg-red-900/20 transform -translate-y-full transition-transform duration-300 group-hover:translate-y-0 opacity-0 group-hover:opacity-100"></span>
       )}
     </Link>
   );
@@ -203,10 +200,10 @@ const MobileNavLink = ({
   return (
     <Link 
       href={href} 
-      className={`relative block px-3 py-2 rounded-md text-base font-medium transition-all duration-300 overflow-hidden group ${
+      className={`relative block px-3 py-2 rounded-md text-base font-medium transition-all duration-300 overflow-hidden group text-white ${
         isActive 
-          ? 'text-red-400 bg-red-900/20' 
-          : 'text-white hover:text-red-300'
+          ? 'bg-gray-800' 
+          : 'hover:bg-gray-800/50'
       }`}
       onClick={(e) => onClick(e, href)}
     >
