@@ -7,11 +7,11 @@ import { useEffect, useState, useRef, RefObject } from 'react';
  * @param options IntersectionObserver options
  * @returns [ref, isVisible] - Ref to attach to the element and boolean indicating if element is visible
  */
-export const useInView = (
+export const useInView = <T extends HTMLElement>(
   options = { threshold: 0.1, triggerOnce: true }
-): [RefObject<HTMLElement | null>, boolean] => {
+): [RefObject<T>, boolean] => {
   const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<T>(null);
   const { threshold, triggerOnce } = options;
 
   useEffect(() => {

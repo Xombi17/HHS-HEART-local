@@ -24,7 +24,35 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   triggerOnce = true,
   id,
 }) => {
-  const [ref, isVisible] = useInView({ threshold, triggerOnce });
+  const [isVisible, setIsVisible] = React.useState(false);
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          if (triggerOnce && ref.current) {
+            observer.unobserve(ref.current);
+          }
+        } else if (!triggerOnce) {
+          setIsVisible(false);
+        }
+      },
+      { threshold }
+    );
+
+    const currentRef = ref.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, [threshold, triggerOnce]);
 
   // Get animation classes
   const animationClass = animations[animation];
@@ -34,14 +62,14 @@ const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   const delayStyle = delay ? { transitionDelay: `${delay}ms` } : {};
 
   return (
-    <section
+    <div
       ref={ref}
       id={id}
       className={`${className} ${animationClass} ${isVisible ? visibleClass : ''}`}
       style={delayStyle}
     >
       {children}
-    </section>
+    </div>
   );
 };
 

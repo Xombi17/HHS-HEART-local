@@ -89,10 +89,10 @@ interface TeamSectionProps {
 
 const TeamSection: React.FC<TeamSectionProps> = ({ teamMembers = placeholderTeam }) => {
   return (
-    <section id="team-section" className="py-16 bg-white dark:bg-gray-900 scroll-mt-20">
+    <section id="team-section" className="py-20 bg-white dark:bg-gray-900 scroll-mt-20">
       <div className="container mx-auto px-4">
-        <AnimatedSection animation="slideUp" className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+        <AnimatedSection animation="slideUp" className="text-center mb-16">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
             Our Team
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
@@ -100,7 +100,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({ teamMembers = placeholderTeam
           </p>
         </AnimatedSection>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
           {teamMembers.map((member, index) => (
             <AnimatedSection 
               key={index} 
