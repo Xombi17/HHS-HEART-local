@@ -5,6 +5,8 @@ import { quizQuestions } from './quizData';
 import Question from './Question';
 import Results from './Results';
 import Button from '@/components/common/Button';
+import NameModal from './NameModal';
+import { saveQuizResult } from '@/services/quizResultsService';
 
 const QuizContainer: React.FC = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
@@ -12,6 +14,8 @@ const QuizContainer: React.FC = () => {
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
   const [quizCompleted, setQuizCompleted] = useState<boolean>(false);
   const [score, setScore] = useState<number>(0);
+  const [userName, setUserName] = useState<string>('');
+  const [showNameModal, setShowNameModal] = useState<boolean>(true);
   
   // Calculate score when quiz is completed
   useEffect(() => {
@@ -23,8 +27,13 @@ const QuizContainer: React.FC = () => {
         return total;
       }, 0);
       setScore(newScore);
+      
+      // Save the quiz result
+      if (userName) {
+        saveQuizResult(userName, newScore, quizQuestions.length);
+      }
     }
-  }, [quizCompleted, answers]);
+  }, [quizCompleted, answers, userName]);
   
   const handleSelectAnswer = (answerIndex: number) => {
     const newAnswers = [...answers];
@@ -59,14 +68,27 @@ const QuizContainer: React.FC = () => {
     setShowAnswer(false);
     setQuizCompleted(false);
     setScore(0);
+    setShowNameModal(true); // Show name modal again for the new attempt
   };
   
+  const handleNameSubmit = (name: string) => {
+    setUserName(name);
+    setShowNameModal(false);
+  };
+  
+  // Show name modal first
+  if (showNameModal) {
+    return <NameModal onSubmit={handleNameSubmit} />;
+  }
+  
+  // Show results if completed
   if (quizCompleted) {
     return (
       <Results 
         score={score} 
         totalQuestions={quizQuestions.length} 
-        onRestartQuiz={handleRestartQuiz} 
+        onRestartQuiz={handleRestartQuiz}
+        userName={userName}
       />
     );
   }
@@ -81,8 +103,13 @@ const QuizContainer: React.FC = () => {
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
           Heart Knowledge Quiz
         </h2>
-        <div className="text-sm font-medium text-gray-600 dark:text-gray-400">
-          Question {currentQuestionIndex + 1} of {quizQuestions.length}
+        <div className="flex items-center gap-4">
+          <div className="text-sm font-medium text-gray-600 dark:text-gray-400">
+            Question {currentQuestionIndex + 1} of {quizQuestions.length}
+          </div>
+          <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
+            Player: {userName}
+          </div>
         </div>
       </div>
       
