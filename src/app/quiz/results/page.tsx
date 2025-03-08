@@ -79,11 +79,18 @@ export default function QuizResultsPage() {
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
             Quiz Results History
           </h1>
-          <Link href="/quiz">
-            <Button variant="secondary">
-              Back to Quiz
-            </Button>
-          </Link>
+          <div className="flex gap-2">
+            <Link href="/quiz/admin">
+              <Button variant="secondary">
+                Admin Dashboard
+              </Button>
+            </Link>
+            <Link href="/quiz">
+              <Button variant="secondary">
+                Back to Quiz
+              </Button>
+            </Link>
+          </div>
         </div>
         
         <p className="text-lg text-gray-700 dark:text-gray-300 mb-8">
