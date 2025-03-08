@@ -8,7 +8,7 @@ import AnimatedSection from '../common/AnimatedSection';
 const placeholderTeam: TeamMemberProps[] = [
   {
     name: 'Varad Joshi',
-    imageSrc: '/images/team/placeholder.svg',
+    imageSrc: '/images/team/avatars/male-avatar.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
       github: 'https://github.com',
@@ -17,7 +17,7 @@ const placeholderTeam: TeamMemberProps[] = [
   },
   {
     name: 'Anushka Kedare',
-    imageSrc: '/images/team/placeholder.svg',
+    imageSrc: '/images/team/avatars/female-avatar.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
       email: 'anushka@hhsheart.org'
@@ -25,7 +25,7 @@ const placeholderTeam: TeamMemberProps[] = [
   },
   {
     name: 'Manvith Karkera',
-    imageSrc: '/images/team/placeholder.svg',
+    imageSrc: '/images/team/avatars/male-avatar2.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
       github: 'https://github.com',
@@ -34,7 +34,7 @@ const placeholderTeam: TeamMemberProps[] = [
   },
   {
     name: 'Delisha Duarte',
-    imageSrc: '/images/team/placeholder.svg',
+    imageSrc: '/images/team/avatars/female-avatar2.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
       github: 'https://github.com'
@@ -42,7 +42,7 @@ const placeholderTeam: TeamMemberProps[] = [
   },
   {
     name: 'Komal Kanojiya',
-    imageSrc: '/images/team/placeholder.svg',
+    imageSrc: '/images/team/avatars/female-avatar3.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
       email: 'komal@hhsheart.org'
@@ -50,7 +50,7 @@ const placeholderTeam: TeamMemberProps[] = [
   },
   {
     name: 'Arjun Kharche',
-    imageSrc: '/images/team/placeholder.svg',
+    imageSrc: '/images/team/avatars/male-avatar3.svg',
     socialLinks: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com'
@@ -58,7 +58,7 @@ const placeholderTeam: TeamMemberProps[] = [
   },
   {
     name: 'Joshua Jimmy',
-    imageSrc: '/images/team/placeholder.svg',
+    imageSrc: '/images/team/avatars/male-avatar.svg',
     socialLinks: {
       github: 'https://github.com',
       linkedin: 'https://linkedin.com',
@@ -67,7 +67,7 @@ const placeholderTeam: TeamMemberProps[] = [
   },
   {
     name: 'Tuhin Jalui',
-    imageSrc: '/images/team/placeholder.svg',
+    imageSrc: '/images/team/avatars/male-avatar2.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
       github: 'https://github.com'
@@ -75,7 +75,7 @@ const placeholderTeam: TeamMemberProps[] = [
   },
   {
     name: 'Vedank Kator',
-    imageSrc: '/images/team/placeholder.svg',
+    imageSrc: '/images/team/avatars/male-avatar3.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
       github: 'https://github.com'
@@ -83,7 +83,7 @@ const placeholderTeam: TeamMemberProps[] = [
   },
   {
     name: 'Chrism Fernandes',
-    imageSrc: '/images/team/placeholder.svg',
+    imageSrc: '/images/team/avatars/male-avatar.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
       email: 'chrism@hhsheart.org'
@@ -91,7 +91,7 @@ const placeholderTeam: TeamMemberProps[] = [
   },
   {
     name: 'Nethan Gonsalves',
-    imageSrc: '/images/team/placeholder.svg',
+    imageSrc: '/images/team/avatars/male-avatar2.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
       email: 'nethan@hhsheart.org'

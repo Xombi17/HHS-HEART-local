@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <!-- Background -->
+  <circle cx="50" cy="50" r="50" fill="#38A169" />
+  
+  <!-- Shirt/Collar -->
+  <path d="M50 85 L30 70 L35 60 L50 65 L65 60 L70 70 Z" fill="#276749" />
+  
+  <!-- Face -->
+  <circle cx="50" cy="42" r="25" fill="#E6DCCD" />
+  
+  <!-- Hair -->
+  <path d="M30 42 L35 25 L45 20 L55 20 L65 25 L70 42 Q60 38 50 38 Q40 38 30 42 Z" fill="#6B4F30" />
+  
+  <!-- Eyes -->
+  <ellipse cx="40" cy="42" rx="3" ry="4" fill="#2D3748" />
+  <ellipse cx="60" cy="42" rx="3" ry="4" fill="#2D3748" />
+  
+  <!-- Beard -->
+  <path d="M35 50 Q50 65 65 50 L65 65 Q50 72 35 65 Z" fill="#795548" fill-opacity="0.5" />
+</svg> 

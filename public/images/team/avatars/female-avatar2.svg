@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <!-- Background -->
+  <circle cx="50" cy="50" r="50" fill="#667EEA" />
+  
+  <!-- Shirt/Collar -->
+  <path d="M50 85 L30 70 L35 60 L50 65 L65 60 L70 70 Z" fill="#5A67D8" />
+  
+  <!-- Face -->
+  <circle cx="50" cy="42" r="25" fill="#F8E3C9" />
+  
+  <!-- Hair -->
+  <path d="M25 50 C25 25 75 25 75 50 L70 50 C70 30 30 30 30 50 Z" fill="#000000" />
+  <path d="M28 50 L28 65 L32 68 L35 75 L40 68 L60 68 L65 75 L68 68 L72 65 L72 50 Z" fill="#000000" />
+  
+  <!-- Eyes -->
+  <ellipse cx="40" cy="42" rx="3" ry="4" fill="#2D3748" />
+  <ellipse cx="60" cy="42" rx="3" ry="4" fill="#2D3748" />
+  
+  <!-- Lips -->
+  <path d="M45 52 Q50 56 55 52" stroke="#CC6B8E" stroke-width="1.5" fill="none" />
+  
+  <!-- Earrings -->
+  <circle cx="25" cy="45" r="2" fill="#FFC857" />
+  <circle cx="75" cy="45" r="2" fill="#FFC857" />
+</svg> 
