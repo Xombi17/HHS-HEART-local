@@ -1,4 +1,11 @@
+'use client';
+
 import { scroller } from 'react-scroll';
+
+/**
+ * Checks if code is running in a browser environment
+ */
+const isBrowser = () => typeof window !== 'undefined';
 
 /**
  * Smoothly scrolls to the specified element
@@ -7,6 +14,8 @@ import { scroller } from 'react-scroll';
  * @param duration - Duration of the scroll animation in ms (default: 800)
  */
 export const scrollToElement = (elementId: string, offset: number = -80, duration: number = 800): void => {
+  if (!isBrowser()) return;
+  
   scroller.scrollTo(elementId, {
     duration,
     delay: 0,
@@ -20,6 +29,8 @@ export const scrollToElement = (elementId: string, offset: number = -80, duratio
  * @param duration - Duration of the scroll animation in ms (default: 800)
  */
 export const scrollToTop = (duration: number = 800): void => {
+  if (!isBrowser()) return;
+  
   window.scrollTo({
     top: 0,
     behavior: 'smooth',

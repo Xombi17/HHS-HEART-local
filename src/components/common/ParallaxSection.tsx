@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { Parallax } from 'react-parallax';
 
 interface ParallaxSectionProps {
@@ -22,6 +22,38 @@ const ParallaxSection: React.FC<ParallaxSectionProps> = ({
   overlayOpacity = 0.5,
   className = '',
 }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Render a simple version during server-side rendering to prevent hydration mismatch
+  if (!isMounted) {
+    return (
+      <div 
+        className={`relative ${className}`}
+        style={{ height, backgroundImage: `url(${imageSrc})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      >
+        {/* Overlay */}
+        <div 
+          className="absolute inset-0" 
+          style={{ 
+            backgroundColor: overlayColor,
+            opacity: overlayOpacity,
+          }}
+        />
+        
+        {/* Content */}
+        <div className="relative h-full flex items-center justify-center">
+          <div className="container mx-auto px-4 py-16 z-10">
+            {children}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <Parallax
       bgImage={imageSrc}

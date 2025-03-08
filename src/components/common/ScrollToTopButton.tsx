@@ -5,10 +5,16 @@ import { scrollToTop } from '@/utils/scrollUtils';
 
 const ScrollToTopButton: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Handle mounting to prevent hydration mismatch
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Show button when page is scrolled down
   const toggleVisibility = () => {
-    if (window.scrollY > 300) {
+    if (typeof window !== 'undefined' && window.scrollY > 300) {
       setIsVisible(true);
     } else {
       setIsVisible(false);
@@ -17,13 +23,21 @@ const ScrollToTopButton: React.FC = () => {
 
   // Set up scroll event listener
   useEffect(() => {
+    if (!isMounted) return;
+    
     window.addEventListener('scroll', toggleVisibility);
+    // Initial check
+    toggleVisibility();
+    
     return () => window.removeEventListener('scroll', toggleVisibility);
-  }, []);
+  }, [isMounted]);
 
   const handleScrollToTop = () => {
     scrollToTop();
   };
+
+  // Don't render anything during SSR
+  if (!isMounted) return null;
 
   return (
     <button

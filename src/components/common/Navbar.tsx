@@ -8,10 +8,18 @@ import { scrollToElement } from '@/utils/scrollUtils';
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
+
+  // Handle mounting to prevent hydration mismatch
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Handle scroll event to change navbar appearance
   useEffect(() => {
+    if (!isMounted) return;
+
     const handleScroll = () => {
       if (window.scrollY > 10) {
         setIsScrolled(true);
@@ -21,8 +29,11 @@ const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
+    // Initial check
+    handleScroll();
+    
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isMounted]);
 
   // Handle smooth scrolling for hash links
   const handleNavLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -34,14 +45,17 @@ const Navbar = () => {
     }
   };
 
-  return (
-    <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+  // Use a consistent initial state for server-side rendering
+  const navbarClass = isMounted 
+    ? `fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
           ? 'bg-white bg-opacity-95 shadow-md dark:bg-gray-900 dark:bg-opacity-95' 
           : 'bg-transparent dark:bg-transparent'
-      }`}
-    >
+      }`
+    : 'fixed top-0 left-0 right-0 z-50 bg-white bg-opacity-95 shadow-md dark:bg-gray-900 dark:bg-opacity-95';
+
+  return (
+    <nav className={navbarClass}>
       <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           <Link href="/" className="text-2xl font-bold text-red-600 dark:text-red-500">

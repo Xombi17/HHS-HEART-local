@@ -41,3 +41,8 @@ body {
 section[id] {
   scroll-margin-top: 80px;
 }
+
+/* Prevent content shift during hydration */
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}
