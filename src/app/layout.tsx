@@ -8,6 +8,7 @@ import ScrollToTopButton from "@/components/common/ScrollToTopButton";
 import PerformanceOptimizer from "@/components/common/PerformanceOptimizer";
 import PerformanceMonitor from "@/components/common/PerformanceMonitor";
 import ServiceWorkerRegistration from "@/components/common/ServiceWorkerRegistration";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 // Optimize font loading
 const geistSans = Geist({
@@ -53,23 +54,25 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
       </head>
-      <body className="min-h-screen flex flex-col bg-white dark:bg-gray-900">
-        <Suspense fallback={null}>
-          <Navbar />
-        </Suspense>
-        
-        <main className="flex-grow pt-16">
-          {children}
-        </main>
-        
-        <Suspense fallback={null}>
-          <Footer />
-          <ScrollToTopButton />
-          <ServiceWorkerRegistration />
-        </Suspense>
-        
-        {/* Performance monitoring tool (only visible in development) */}
-        <PerformanceMonitor />
+      <body className={`min-h-screen flex flex-col bg-white dark:bg-gray-900 ${geistSans.variable} ${geistMono.variable}`}>
+        <ThemeProvider>
+          <Suspense fallback={null}>
+            <Navbar />
+          </Suspense>
+          
+          <main className="flex-grow pt-16">
+            {children}
+          </main>
+          
+          <Suspense fallback={null}>
+            <Footer />
+            <ScrollToTopButton />
+            <ServiceWorkerRegistration />
+          </Suspense>
+          
+          {/* Performance monitoring tool (only visible in development) */}
+          <PerformanceMonitor />
+        </ThemeProvider>
       </body>
     </html>
   );

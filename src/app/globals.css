@@ -3,7 +3,22 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --background-secondary: #f9fafb;
+  --background-tertiary: #f3f4f6;
+  --primary: #dc2626;
+  --primary-hover: #b91c1c;
+  --accent: #ef4444;
   scroll-behavior: smooth;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --background-secondary: #1f2937;
+  --background-tertiary: #111827;
+  --primary: #ef4444;
+  --primary-hover: #dc2626;
+  --accent: #f87171;
 }
 
 @theme inline {
@@ -14,10 +29,21 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  /* Only apply this if theme is set to 'system' */
+  :root:not(.light):not(.dark) {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --background-secondary: #1f2937;
+    --background-tertiary: #111827;
+    --primary: #ef4444;
+    --primary-hover: #dc2626;
+    --accent: #f87171;
   }
+}
+
+/* Theme transition effect */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 html {

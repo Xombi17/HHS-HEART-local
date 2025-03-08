@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { scrollToElement } from '@/utils/scrollUtils';
+import ThemeSelector from './ThemeSelector';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -87,6 +88,9 @@ const Navbar = () => {
             <NavLink href="/about" isActive={pathname === '/about'} onClick={handleNavLinkClick}>
               About
             </NavLink>
+            <div className="ml-2">
+              <ThemeSelector />
+            </div>
             <Link href="/anatomy" className="ml-4">
               <button className="relative overflow-hidden bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-full transition-colors duration-300 flex items-center group">
                 <span className="relative z-10 text-white">Explore Heart</span>
@@ -139,6 +143,9 @@ const Navbar = () => {
               <MobileNavLink href="/about" isActive={pathname === '/about'} onClick={handleNavLinkClick}>
                 About
               </MobileNavLink>
+              <div className="ml-2">
+                <ThemeSelector />
+              </div>
               <Link href="/anatomy" className="mt-2">
                 <button className="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-full transition-colors duration-300 flex items-center justify-center group">
                   <span className="text-white">Explore Heart</span>
