@@ -1,9 +1,11 @@
 'use client';
 
-import TeamMember from './TeamMember';
-import type { TeamMemberProps } from './TeamMember';
+import React from 'react';
+import TeamMember, { TeamMemberProps } from './TeamMember';
+import AnimatedSection from '../common/AnimatedSection';
 
-const teamData = [
+// Placeholder team data - replace with actual team data
+const placeholderTeam: TeamMemberProps[] = [
   {
     name: 'Varad Joshi',
     role: 'Team Lead',
@@ -16,20 +18,21 @@ const teamData = [
   },
   {
     name: 'Anushka Kedare',
-    role: 'Frontend Developer',
+    role: 'Medical Content Specialist',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
-      github: 'https://github.com'
+      email: 'anushka@hhsheart.org'
     }
   },
   {
     name: 'Manvith Karkera',
-    role: 'Backend Developer',
+    role: 'Lead Developer',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
-      github: 'https://github.com'
+      github: 'https://github.com',
+      email: 'manvith@hhsheart.org'
     }
   },
   {
@@ -43,34 +46,35 @@ const teamData = [
   },
   {
     name: 'Komal Kanojiya',
-    role: 'Full Stack Developer',
+    role: 'Educational Content Developer',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
-      github: 'https://github.com'
+      email: 'komal@hhsheart.org'
     }
   },
   {
     name: 'Arjun Kharche',
-    role: 'Database Engineer',
+    role: 'Frontend Developer',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
-      linkedin: 'https://linkedin.com',
-      github: 'https://github.com'
+      github: 'https://github.com',
+      linkedin: 'https://linkedin.com'
     }
   },
   {
     name: 'Joshua Jimmy',
-    role: 'Frontend Developer',
+    role: 'Backend Developer',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
+      github: 'https://github.com',
       linkedin: 'https://linkedin.com',
-      github: 'https://github.com'
+      email: 'joshua@hhsheart.org'
     }
   },
   {
     name: 'Tuhin Jalui',
-    role: 'Backend Developer',
+    role: 'Interactive Tools Specialist',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
@@ -79,7 +83,7 @@ const teamData = [
   },
   {
     name: 'Vedank Kator',
-    role: 'DevOps Engineer',
+    role: '3D Modeling Expert',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
@@ -88,52 +92,60 @@ const teamData = [
   },
   {
     name: 'Chrism Fernandes',
-    role: 'Quality Assurance',
+    role: 'Quality Assurance Specialist',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
-      github: 'https://github.com'
+      email: 'chrism@hhsheart.org'
     }
   },
   {
     name: 'Nethan Gonsalves',
-    role: 'System Architect',
+    role: 'Content Researcher',
     imageSrc: '/images/team/placeholder.svg',
     socialLinks: {
       linkedin: 'https://linkedin.com',
-      github: 'https://github.com'
+      email: 'nethan@hhsheart.org'
     }
   }
 ];
 
-export default function TeamSection() {
+interface TeamSectionProps {
+  teamMembers?: TeamMemberProps[];
+}
+
+const TeamSection: React.FC<TeamSectionProps> = ({ teamMembers = placeholderTeam }) => {
   return (
-    <section className="py-20 bg-white dark:bg-gray-900">
+    <section id="team-section" className="py-20 bg-white dark:bg-gray-900 scroll-mt-20">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <AnimatedSection animation="slideUp" className="text-center mb-16">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
             Our Team
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Meet the dedicated professionals behind HHS Heart, committed to making heart education accessible to everyone.
           </p>
-        </div>
+        </AnimatedSection>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {teamData.map((member, index) => (
-            <div 
-              key={member.name} 
-              className="fade-in" 
-              style={{ 
-                animationDelay: `${index * 150}ms`,
-                opacity: 0
-              }}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+          {teamMembers.map((member, index) => (
+            <AnimatedSection 
+              key={index} 
+              animation="fadeIn" 
+              delay={index * 150}
             >
-              <TeamMember {...member} />
-            </div>
+              <TeamMember 
+                name={member.name}
+                role={member.role}
+                imageSrc={member.imageSrc}
+                socialLinks={member.socialLinks}
+              />
+            </AnimatedSection>
           ))}
         </div>
       </div>
     </section>
   );
-} 
+};
+
+export default TeamSection; 
