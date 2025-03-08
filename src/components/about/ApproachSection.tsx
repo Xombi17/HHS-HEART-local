@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import AnimatedSection from '../common/AnimatedSection';
 
 const ApproachSection: React.FC = () => {
   const approaches = [
@@ -38,19 +39,21 @@ const ApproachSection: React.FC = () => {
   return (
     <section className="py-16 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <AnimatedSection animation="slideUp" className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
             Our Approach
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             How we create engaging and educational content about the human heart
           </p>
-        </div>
+        </AnimatedSection>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {approaches.map((approach, index) => (
-            <div 
+            <AnimatedSection 
               key={index} 
+              animation="fadeIn"
+              delay={index * 200}
               className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 transition-transform duration-300 hover:shadow-lg hover:-translate-y-1"
             >
               <div className="flex justify-center mb-4">
@@ -62,16 +65,16 @@ const ApproachSection: React.FC = () => {
               <p className="text-gray-700 dark:text-gray-300 text-center">
                 {approach.description}
               </p>
-            </div>
+            </AnimatedSection>
           ))}
         </div>
         
-        <div className="mt-16 bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
+        <AnimatedSection animation="slideUp" delay={300} className="mt-16 bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
           <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6 text-center">
             Our Commitment to Accuracy
           </h3>
           <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="md:w-1/2">
+            <AnimatedSection animation="slideRight" delay={400} className="md:w-1/2">
               <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
                 All content on HHS Heart is developed with a commitment to scientific accuracy and educational value. 
                 We work with medical professionals to ensure that our information is correct and up-to-date.
@@ -80,8 +83,8 @@ const ApproachSection: React.FC = () => {
                 While our platform is designed for educational purposes and not as a substitute for medical advice, 
                 we strive to provide reliable information that helps users better understand heart anatomy and function.
               </p>
-            </div>
-            <div className="md:w-1/2 flex justify-center">
+            </AnimatedSection>
+            <AnimatedSection animation="slideLeft" delay={400} className="md:w-1/2 flex justify-center">
               <div className="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 p-6 rounded-r-lg max-w-md">
                 <h4 className="text-lg font-semibold text-red-700 dark:text-red-400 mb-2">
                   Educational Disclaimer
@@ -92,9 +95,9 @@ const ApproachSection: React.FC = () => {
                   substitute for professional medical care or advice.
                 </p>
               </div>
-            </div>
+            </AnimatedSection>
           </div>
-        </div>
+        </AnimatedSection>
       </div>
     </section>
   );

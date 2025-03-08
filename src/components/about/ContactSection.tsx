@@ -2,12 +2,13 @@
 
 import React from 'react';
 import Button from '@/components/common/Button';
+import AnimatedSection from '../common/AnimatedSection';
 
 const ContactSection: React.FC = () => {
   return (
     <section className="py-16 bg-white dark:bg-gray-800">
       <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center">
+        <AnimatedSection animation="slideUp" className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
             Get in Touch
           </h2>
@@ -17,7 +18,7 @@ const ContactSection: React.FC = () => {
           
           <div className="bg-gray-50 dark:bg-gray-700 rounded-lg shadow-md p-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-              <div>
+              <AnimatedSection animation="slideRight" delay={200} className="space-y-4">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                   Contact Information
                 </h3>
@@ -55,9 +56,9 @@ const ContactSection: React.FC = () => {
                     </span>
                   </li>
                 </ul>
-              </div>
+              </AnimatedSection>
               
-              <div>
+              <AnimatedSection animation="slideLeft" delay={200} className="space-y-4">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                   Follow Us
                 </h3>
@@ -102,16 +103,16 @@ const ContactSection: React.FC = () => {
                     </svg>
                   </a>
                 </div>
-              </div>
+              </AnimatedSection>
             </div>
             
-            <div className="text-center">
+            <AnimatedSection animation="fadeIn" delay={400} className="text-center">
               <Button>
                 Send Us a Message
               </Button>
-            </div>
+            </AnimatedSection>
           </div>
-        </div>
+        </AnimatedSection>
       </div>
     </section>
   );

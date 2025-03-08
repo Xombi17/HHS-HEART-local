@@ -4,8 +4,13 @@ import React from 'react';
 import HeartModel from './HeartModel';
 import Button from '../common/Button';
 import Link from 'next/link';
+import { scrollToElement } from '@/utils/scrollUtils';
 
 const Hero = () => {
+  const handleScrollToFeatures = () => {
+    scrollToElement('features-section');
+  };
+
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
       {/* Background gradient */}
@@ -41,7 +46,11 @@ const Hero = () => {
       </div>
       
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <button 
+        onClick={handleScrollToFeatures}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer bg-transparent border-none focus:outline-none"
+        aria-label="Scroll to features"
+      >
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
           className="h-8 w-8 text-red-600 dark:text-red-500" 
@@ -56,7 +65,7 @@ const Hero = () => {
             d="M19 14l-7 7m0 0l-7-7m7 7V3" 
           />
         </svg>
-      </div>
+      </button>
     </div>
   );
 };

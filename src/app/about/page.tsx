@@ -6,6 +6,7 @@ import ApproachSection from '@/components/about/ApproachSection';
 import TeamSection from '@/components/about/TeamSection';
 import ContactSection from '@/components/about/ContactSection';
 import DisclaimerSection from '@/components/about/DisclaimerSection';
+import ParallaxAboutSection from '@/components/about/ParallaxAboutSection';
 
 export default function AboutPage() {
   return (
@@ -25,6 +26,9 @@ export default function AboutPage() {
       
       {/* Mission Section */}
       <MissionSection />
+      
+      {/* Parallax Section */}
+      <ParallaxAboutSection />
       
       {/* Approach Section */}
       <ApproachSection />

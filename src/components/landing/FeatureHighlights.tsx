@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Button from '../common/Button';
+import AnimatedSection from '../common/AnimatedSection';
 
 const features = [
   {
@@ -49,21 +50,23 @@ const features = [
 
 const FeatureHighlights = () => {
   return (
-    <section className="py-16 bg-white dark:bg-gray-900">
+    <section id="features-section" className="py-16 bg-white dark:bg-gray-900 scroll-mt-20">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <AnimatedSection animation="slideUp" className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
             Explore Our Features
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Discover the comprehensive tools and resources we offer to help you understand the human heart
           </p>
-        </div>
+        </AnimatedSection>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
-            <div 
+            <AnimatedSection 
               key={index} 
+              animation="fadeIn" 
+              delay={index * 200}
               className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
             >
               <div className="mb-4">{feature.icon}</div>
@@ -78,7 +81,7 @@ const FeatureHighlights = () => {
                   Learn More
                 </Button>
               </Link>
-            </div>
+            </AnimatedSection>
           ))}
         </div>
       </div>

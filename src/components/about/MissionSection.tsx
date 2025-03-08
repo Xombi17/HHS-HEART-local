@@ -2,13 +2,14 @@
 
 import React from 'react';
 import Image from 'next/image';
+import AnimatedSection from '../common/AnimatedSection';
 
 const MissionSection: React.FC = () => {
   return (
     <section className="py-16 bg-white dark:bg-gray-800">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="order-2 lg:order-1">
+          <AnimatedSection animation="slideRight" className="order-2 lg:order-1">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
               Our Mission
             </h2>
@@ -29,7 +30,7 @@ const MissionSection: React.FC = () => {
                 Our Values
               </h3>
               <ul className="space-y-3">
-                <li className="flex items-start">
+                <AnimatedSection animation="slideUp" delay={100} className="flex items-start">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mr-3 mt-0.5">
                     <svg className="w-4 h-4 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -38,8 +39,8 @@ const MissionSection: React.FC = () => {
                   <span className="text-gray-700 dark:text-gray-300">
                     <strong className="font-medium text-gray-900 dark:text-white">Educational Excellence:</strong> We strive for scientific accuracy and engaging presentation.
                   </span>
-                </li>
-                <li className="flex items-start">
+                </AnimatedSection>
+                <AnimatedSection animation="slideUp" delay={200} className="flex items-start">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mr-3 mt-0.5">
                     <svg className="w-4 h-4 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -48,8 +49,8 @@ const MissionSection: React.FC = () => {
                   <span className="text-gray-700 dark:text-gray-300">
                     <strong className="font-medium text-gray-900 dark:text-white">Accessibility:</strong> We make complex medical information understandable for all.
                   </span>
-                </li>
-                <li className="flex items-start">
+                </AnimatedSection>
+                <AnimatedSection animation="slideUp" delay={300} className="flex items-start">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mr-3 mt-0.5">
                     <svg className="w-4 h-4 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -58,8 +59,8 @@ const MissionSection: React.FC = () => {
                   <span className="text-gray-700 dark:text-gray-300">
                     <strong className="font-medium text-gray-900 dark:text-white">Innovation:</strong> We leverage technology to create immersive learning experiences.
                   </span>
-                </li>
-                <li className="flex items-start">
+                </AnimatedSection>
+                <AnimatedSection animation="slideUp" delay={400} className="flex items-start">
                   <span className="flex-shrink-0 w-6 h-6 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mr-3 mt-0.5">
                     <svg className="w-4 h-4 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -68,12 +69,12 @@ const MissionSection: React.FC = () => {
                   <span className="text-gray-700 dark:text-gray-300">
                     <strong className="font-medium text-gray-900 dark:text-white">Community:</strong> We foster a collaborative environment for learning and sharing knowledge.
                   </span>
-                </li>
+                </AnimatedSection>
               </ul>
             </div>
-          </div>
+          </AnimatedSection>
           
-          <div className="order-1 lg:order-2 flex justify-center">
+          <AnimatedSection animation="slideLeft" className="order-1 lg:order-2 flex justify-center">
             <div className="relative w-full max-w-md h-[400px] rounded-lg overflow-hidden shadow-xl">
               <Image
                 src="/images/heart-illustration.svg"
@@ -82,7 +83,7 @@ const MissionSection: React.FC = () => {
                 className="object-cover"
               />
             </div>
-          </div>
+          </AnimatedSection>
         </div>
       </div>
     </section>
