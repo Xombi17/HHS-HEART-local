@@ -10,6 +10,7 @@ import ServiceWorkerRegistration from "@/components/common/ServiceWorkerRegistra
 import PerformanceMonitor from "@/components/common/PerformanceMonitor";
 import PreloadLinks from "@/components/common/PreloadLinks";
 import BackgroundParticlesClient from "@/components/common/BackgroundParticlesClient";
+import CursorEffects from '@/components/effects/CursorEffects';
 
 // Optimize font loading
 const inter = Inter({
