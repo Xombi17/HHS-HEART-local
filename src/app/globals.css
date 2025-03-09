@@ -288,3 +288,145 @@ section[id] {
   position: relative;
   overflow: hidden;
 }
+
+/* Add a section transition gradient effect */
+.section-transition {
+  position: relative;
+  height: 150px;
+  margin-top: -150px;
+  z-index: 5;
+  background: linear-gradient(to bottom, 
+    rgba(10, 10, 20, 0) 0%, 
+    rgba(13, 18, 36, 0.5) 40%, 
+    rgba(13, 18, 36, 0.9) 80%, 
+    rgba(13, 18, 36, 1) 100%
+  );
+  pointer-events: none;
+}
+
+/* Features section styling with matching background */
+.features-section {
+  background-color: #0d1224;
+  position: relative;
+  z-index: 10;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+/* Extend particles into transition area */
+.hero-particles {
+  overflow: visible !important;
+}
+
+.hero-particles::after {
+  content: '';
+  position: absolute;
+  bottom: -150px;
+  left: 0;
+  right: 0;
+  height: 150px;
+  background: linear-gradient(to bottom, 
+    rgba(10, 10, 20, 0.7) 0%, 
+    rgba(10, 10, 20, 0.3) 50%, 
+    rgba(10, 10, 20, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Special styling for the feature badge */
+.feature-badge {
+  position: relative;
+  z-index: 15;
+  transform: translateY(-30px);
+  margin-bottom: -30px;
+}
+
+/* Remove any dividers or borders between sections */
+section + section {
+  border-top: none !important;
+  box-shadow: none !important;
+}
+
+/* Make sure the featured section has no top padding */
+#features {
+  padding-top: 0 !important;
+  overflow: hidden;
+}
+
+/* Stats section transition gradient */
+.features-to-stats-transition {
+  position: relative;
+  height: 150px;
+  margin-top: -150px;
+  z-index: 5;
+  background: linear-gradient(to bottom, 
+    rgba(13, 18, 36, 0) 0%, 
+    rgba(15, 23, 42, 0.5) 40%, 
+    rgba(15, 23, 42, 0.9) 80%, 
+    rgba(15, 23, 42, 1) 100%
+  );
+  pointer-events: none;
+}
+
+/* Stats section styling with matching background */
+.stats-section {
+  background-color: #0f172a;
+  position: relative;
+  z-index: 10;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+/* Special styling for the stats heading badge */
+.stats-badge {
+  position: relative;
+  z-index: 15;
+  transform: translateY(-30px);
+  margin-bottom: -20px;
+}
+
+/* Feature card hover effect with extended shadow */
+.feature-card {
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.feature-card::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 5%;
+  width: 90%;
+  height: 20px;
+  background: linear-gradient(to bottom, rgba(15, 23, 42, 0.3), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  filter: blur(10px);
+  z-index: -1;
+}
+
+.feature-card:hover::after {
+  opacity: 1;
+}
+
+/* Features overflow to assist with transition to stats */
+.features-to-stats-overflow {
+  position: relative;
+  z-index: 20;
+  margin-bottom: -20px;
+  overflow: visible;
+}
+
+.features-to-stats-overflow::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.2), transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}

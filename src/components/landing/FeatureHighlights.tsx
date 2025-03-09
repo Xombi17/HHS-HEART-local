@@ -54,62 +54,68 @@ const features = [
 
 const FeatureHighlights = () => {
   return (
-    <section id="features-section" className="py-20 bg-gray-900 scroll-mt-20">
-      <div className="container mx-auto px-4">
-        <AnimatedSection animation="slideUp" className="text-center mb-16">
-          <span className="inline-block px-4 py-2 rounded-full bg-red-900/30 text-red-400 font-medium text-sm mb-4">
-            Our Features
-          </span>
-          <h2 className="text-4xl font-bold text-white mb-6">
-            Explore Our Interactive Features
-          </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Discover the comprehensive tools and resources we offer to help you understand the human heart
-          </p>
-        </AnimatedSection>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {features.map((feature, index) => (
-            <AnimatedSection 
-              key={index} 
-              animation="fadeIn" 
-              delay={index * 200}
-              className={`${feature.color} p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-700`}
-            >
-              <div className="mb-6 flex justify-center">
-                <div className="p-3 rounded-xl bg-gray-800 shadow-md">
-                  {feature.icon}
+    <>
+      {/* Gradient transition element */}
+      <div className="section-transition"></div>
+      
+      {/* Features section with updated styles */}
+      <section id="features" className="features-section py-10 scroll-mt-20">
+        <div className="container mx-auto px-4">
+          <AnimatedSection animation="slideUp" className="text-center mb-16">
+            <span className="inline-block px-4 py-2 rounded-full bg-red-900/30 text-red-400 font-medium text-sm mb-4 feature-badge">
+              Our Features
+            </span>
+            <h2 className="text-4xl font-bold text-white mb-6">
+              Explore Our Interactive Features
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Discover the comprehensive tools and resources we offer to help you understand the human heart
+            </p>
+          </AnimatedSection>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            {features.map((feature, index) => (
+              <AnimatedSection 
+                key={index} 
+                animation="fadeIn" 
+                delay={index * 200}
+                className={`feature-card ${feature.color} p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-700`}
+              >
+                <div className="mb-6 flex justify-center">
+                  <div className="p-3 rounded-xl bg-gray-800 shadow-md">
+                    {feature.icon}
+                  </div>
                 </div>
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-4 text-center">
-                {feature.title}
-              </h3>
-              <p className="text-gray-300 mb-6 text-center">
-                {feature.description}
-              </p>
-              <div className="flex justify-center">
-                <Link href={feature.link}>
-                  <Button variant="outline" size="md" className="w-full justify-center border-2 border-gray-700 text-gray-300 hover:bg-gray-800 hover:shadow-md transition-all duration-300">
-                    Learn More
-                    <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </Button>
-                </Link>
-              </div>
-            </AnimatedSection>
-          ))}
+                <h3 className="text-xl font-semibold text-white mb-4 text-center">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-300 mb-6 text-center">
+                  {feature.description}
+                </p>
+                <div className="flex justify-center">
+                  <Link href={feature.link}>
+                    <Button variant="outline" size="md" className="w-full justify-center border-2 border-gray-700 text-gray-300 hover:bg-gray-800 hover:shadow-md transition-all duration-300">
+                      Learn More
+                      <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </Button>
+                  </Link>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+          
+          <AnimatedSection animation="fadeIn" delay={800} className="mt-20 text-center features-to-stats-overflow">
+            <Link href="/anatomy">
+              
+                
+              
+            </Link>
+          </AnimatedSection>
         </div>
-        
-        <AnimatedSection animation="fadeIn" delay={800} className="mt-20 text-center">
-          <Link href="/anatomy">
-            <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-300">
-              Start Exploring Now
-            </Button>
-          </Link>
-        </AnimatedSection>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

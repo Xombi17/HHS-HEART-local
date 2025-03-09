@@ -30,7 +30,7 @@ const Hero = () => {
           density={40} 
           speed={0.5} 
           color="var(--primary)" 
-          className="opacity-70"
+          className="opacity-70 hero-particles"
         />
       </ParallaxLayer>
 
