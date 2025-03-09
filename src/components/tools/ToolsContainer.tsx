@@ -6,14 +6,21 @@ import BMICalculator from './bmi/BMICalculator';
 import HeartRateSimulator from './heart-rate/HeartRateSimulator';
 import HeartRateZones from './heart-rate/HeartRateZones';
 import CalorieCalculator from './calorie/CalorieCalculator';
+import HeartComparisonTool from './HeartComparisonTool';
 import Button from '@/components/common/Button';
 
-type ToolType = 'bmi' | 'heartRateSimulator' | 'heartRateZones' | 'calorieCalculator';
+type ToolType = 'bmi' | 'heartRateSimulator' | 'heartRateZones' | 'calorieCalculator' | 'heartComparison';
 
 const ToolsContainer: React.FC = () => {
   const [activeTool, setActiveTool] = useState<ToolType>('bmi');
   
   const tools = [
+    { 
+      id: 'heartComparison',
+      name: 'Heart Comparison Tool',
+      description: 'Compare healthy and unhealthy hearts to understand different conditions',
+      link: '/tools/heart-comparison'
+    },
     { 
       id: 'bmi', 
       name: 'BMI Calculator', 
@@ -42,6 +49,8 @@ const ToolsContainer: React.FC = () => {
   
   const renderTool = () => {
     switch (activeTool) {
+      case 'heartComparison':
+        return <HeartComparisonTool />;
       case 'bmi':
         return <BMICalculator />;
       case 'heartRateSimulator':
