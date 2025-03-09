@@ -71,22 +71,22 @@ const Navbar = () => {
           
           <div className="hidden md:flex items-center space-x-1">
             <NavLink href="/" isActive={pathname === '/'} onClick={handleNavLinkClick}>
-              Home
+              <span className="text-white">Home</span>
             </NavLink>
             <NavLink href="/anatomy" isActive={pathname === '/anatomy'} onClick={handleNavLinkClick}>
-              Anatomy Explorer
+              <span className="text-white">Anatomy Explorer</span>
             </NavLink>
             <NavLink href="/tools" isActive={pathname === '/tools'} onClick={handleNavLinkClick}>
-              Tools
+              <span className="text-white">Tools</span>
             </NavLink>
             <NavLink href="/quiz" isActive={pathname === '/quiz'} onClick={handleNavLinkClick}>
-              Quiz
+              <span className="text-white">Quiz</span>
             </NavLink>
             <NavLink href="/resources" isActive={pathname === '/resources'} onClick={handleNavLinkClick}>
-              Resources
+              <span className="text-white">Resources</span>
             </NavLink>
             <NavLink href="/about" isActive={pathname === '/about'} onClick={handleNavLinkClick}>
-              About
+              <span className="text-white">About</span>
             </NavLink>
             <div className="ml-2">
               <ThemeSelector />
@@ -126,22 +126,22 @@ const Navbar = () => {
           <div className="md:hidden mt-4 py-4 bg-gray-800 rounded-lg shadow-lg animate-fadeIn text-white">
             <div className="flex flex-col space-y-4 px-4">
               <MobileNavLink href="/" isActive={pathname === '/'} onClick={handleNavLinkClick}>
-                Home
+                <span className="text-white">Home</span>
               </MobileNavLink>
               <MobileNavLink href="/anatomy" isActive={pathname === '/anatomy'} onClick={handleNavLinkClick}>
-                Anatomy Explorer
+                <span className="text-white">Anatomy Explorer</span>
               </MobileNavLink>
               <MobileNavLink href="/tools" isActive={pathname === '/tools'} onClick={handleNavLinkClick}>
-                Interactive Tools
+                <span className="text-white">Interactive Tools</span>
               </MobileNavLink>
               <MobileNavLink href="/quiz" isActive={pathname === '/quiz'} onClick={handleNavLinkClick}>
-                Quiz
+                <span className="text-white">Quiz</span>
               </MobileNavLink>
               <MobileNavLink href="/resources" isActive={pathname === '/resources'} onClick={handleNavLinkClick}>
-                Resources
+                <span className="text-white">Resources</span>
               </MobileNavLink>
               <MobileNavLink href="/about" isActive={pathname === '/about'} onClick={handleNavLinkClick}>
-                About
+                <span className="text-white">About</span>
               </MobileNavLink>
               <div className="ml-2">
                 <ThemeSelector />
