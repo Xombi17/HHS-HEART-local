@@ -23,9 +23,9 @@ const Hero = () => {
   }, []);
 
   return (
-    <ParallaxContainer className="relative w-full min-h-screen overflow-hidden">
-      {/* Background with subtle pattern and blood cells */}
-      <ParallaxLayer depth="back" className="blood-cell-pattern">
+    <ParallaxContainer className="relative w-full min-h-screen overflow-visible">
+      {/* Background with subtle pattern and blood cells - extend to full width */}
+      <ParallaxLayer depth="back" className="blood-cell-pattern absolute inset-0">
         <BackgroundParticles 
           density={40} 
           speed={0.5} 
@@ -34,15 +34,15 @@ const Hero = () => {
         />
       </ParallaxLayer>
 
-      {/* Gradient background with mid-level parallax */}
-      <ParallaxLayer depth="mid" className="gradient-animation opacity-10">
+      {/* Gradient background with mid-level parallax - extend to full width */}
+      <ParallaxLayer depth="mid" className="gradient-animation opacity-10 absolute inset-0">
         <div className="w-full h-full"></div>
       </ParallaxLayer>
       
       {/* Main content */}
       <ParallaxLayer depth="front" className="flex flex-col items-center justify-center">
-        <InteractiveGradient className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
-          <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-12">
+        <InteractiveGradient className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 h-full">
+          <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-12 h-full">
             {/* Left side: Text content */}
             <motion.div 
               className="flex-1 text-center md:text-left"

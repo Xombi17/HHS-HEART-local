@@ -16,7 +16,7 @@ export const ParallaxLayer: React.FC<ParallaxLayerProps> = ({
   const depthClass = `parallax-${depth}`;
   
   return (
-    <div className={`parallax-layer ${depthClass} ${className}`}>
+    <div className={`parallax-layer ${depthClass} ${className}`} style={{ border: 'none' }}>
       {children}
     </div>
   );
@@ -48,7 +48,16 @@ const ParallaxContainer: React.FC<ParallaxContainerProps> = ({
   }, []);
 
   return (
-    <div ref={containerRef} className={`parallax-container ${className}`}>
+    <div 
+      ref={containerRef} 
+      className={`parallax-container ${className}`}
+      style={{ 
+        border: 'none', 
+        overflow: 'visible',
+        marginBottom: '0',
+        paddingBottom: '0'
+      }}
+    >
       {children}
     </div>
   );
