@@ -1,44 +1,60 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Suspense } from "react";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import { Suspense } from 'react';
+import { ThemeProvider } from "@/context/ThemeContext";
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 import ScrollToTopButton from "@/components/common/ScrollToTopButton";
-import PerformanceOptimizer from "@/components/common/PerformanceOptimizer";
-import PerformanceMonitor from "@/components/common/PerformanceMonitor";
 import ServiceWorkerRegistration from "@/components/common/ServiceWorkerRegistration";
-import { ThemeProvider } from "@/context/ThemeContext";
+import PerformanceMonitor from "@/components/common/PerformanceMonitor";
 import PreloadLinks from "@/components/common/PreloadLinks";
+import BackgroundParticlesClient from "@/components/common/BackgroundParticlesClient";
 
 // Optimize font loading
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  display: "swap", // Use swap to prevent FOIT (Flash of Invisible Text)
-  preload: true,
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   preload: true,
 });
 
 export const metadata: Metadata = {
-  title: "HHS Heart - Interactive Heart Anatomy Education",
-  description: "Explore heart anatomy and function through interactive 3D models, tools, and educational content.",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
-  themeColor: "#dc2626",
-  manifest: "/manifest.json",
-  // Add performance-related meta tags
-  other: {
-    "apple-mobile-web-app-capable": "yes",
-    "apple-mobile-web-app-status-bar-style": "default",
-    "apple-mobile-web-app-title": "HHS Heart",
-    "format-detection": "telephone=no",
+  title: "HHS Heart - Interactive Human Heart Education",
+  description:
+    "Explore the human heart through interactive 3D visualization, practical tools, and engaging educational content.",
+  metadataBase: new URL("https://hhs-heart.vercel.app"),
+  openGraph: {
+    title: "HHS Heart - Interactive Human Heart Education",
+    description:
+      "Explore the human heart through interactive 3D visualization.",
+    url: "https://hhs-heart.vercel.app",
+    siteName: "HHS Heart",
+    locale: "en_US",
+    type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "HHS Heart - Interactive Human Heart Education",
+    description:
+      "Explore the human heart through interactive 3D visualization.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  manifest: "/manifest.json",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#111827" },
+  ],
+  appleWebApp: {
+    title: "HHS Heart",
+    statusBarStyle: "black-translucent",
+  },
+  formatDetection: {
+    telephone: false,
+  },
+  keywords: 'heart, anatomy, education, 3D model, interactive, cardiac health',
 };
 
 export default function RootLayout({
@@ -47,32 +63,45 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
         {/* Preload critical assets */}
-        <link rel="preload" href="/models/heart.glb" as="fetch" crossOrigin="anonymous" />
-        {/* DNS prefetch for external resources */}
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+        <link
+          rel="preload"
+          href="/models/heart.glb"
+          as="fetch"
+          crossOrigin="anonymous"
+        />
       </head>
-      <body className={`min-h-screen flex flex-col bg-white dark:bg-gray-900 ${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`min-h-screen flex flex-col ${inter.className}`}>
         <ThemeProvider>
-          <Suspense fallback={null}>
-            <Navbar />
-          </Suspense>
-          
-          <main className="flex-grow pt-16">
-            {children}
-          </main>
-          
-          <Suspense fallback={null}>
-            <Footer />
-            <ScrollToTopButton />
-            <ServiceWorkerRegistration />
-            <PreloadLinks />
-          </Suspense>
-          
-          {/* Performance monitoring tool (only visible in development) */}
+          <div className="bg-background text-foreground min-h-screen flex flex-col relative">
+            {/* Subtle background particles with low opacity */}
+            <div className="fixed inset-0 pointer-events-none z-0">
+              <BackgroundParticlesClient 
+                density={20} 
+                speed={0.3} 
+                color="var(--primary)" 
+                className="opacity-30" 
+              />
+            </div>
+            <div className="blood-cell-pattern fixed inset-0 pointer-events-none z-0 opacity-5"></div>
+            
+            <div className="relative z-10 flex flex-col min-h-screen">
+              <Suspense fallback={null}>
+                <Navbar />
+              </Suspense>
+              <main className="flex-grow pt-16">
+                {children}
+              </main>
+              <Suspense fallback={null}>
+                <Footer />
+                <ScrollToTopButton />
+                <ServiceWorkerRegistration />
+              </Suspense>
+            </div>
+          </div>
+          <PreloadLinks />
           <PerformanceMonitor />
         </ThemeProvider>
       </body>
