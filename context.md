@@ -277,3 +277,8 @@ hhs-heart/
         class="heart-3d-model">
 </iframe>
 ```
+// Add subtle background elements to your layout
+- Floating particles that represent blood cells
+- Subtle gradient animations that respond to user interactions
+- Low-opacity SVG patterns that add texture without being distracting
+- Parallax scrolling effects for depth on landing pages
